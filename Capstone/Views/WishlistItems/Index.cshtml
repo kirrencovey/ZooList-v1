@@ -1,0 +1,45 @@
+﻿@model IEnumerable<Capstone.Models.WishlistItem>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Bucket List</h1>
+
+<p>
+    <a asp-action="Create">Add A Zoo</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Zoo)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Zoo.City)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Zoo.State)
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Zoo.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Zoo.City)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Zoo.State)
+            </td>
+            <td>
+                <a asp-action="Details" asp-controller="Zoos" asp-route-id="@item.Zoo.ZooId">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.WishlistItemId">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
