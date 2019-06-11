@@ -52,7 +52,7 @@
                 @* should redirect to form with dropdown with trips *@
                 <br /><a asp-action="Create" asp-controller="TripItems">Add to Trip</a> |
                 @* should get user and zoo passed in, not as user input *@
-                <br /><a asp-action="Create" asp-controller="Visits">Record a Visit</a>
+                <br /><a asp-action="Create" asp-controller="Visits" asp-route-id="@item.ZooId">Record a Visit</a>
             </td>
         </tr>
 }
