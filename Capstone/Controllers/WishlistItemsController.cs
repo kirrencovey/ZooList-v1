@@ -28,7 +28,13 @@ namespace Capstone.Controllers
         [Authorize]
         public async Task<IActionResult> Index()
         {
-            var applicationDbContext = _context.WishlistItems.Include(w => w.User).Include(w => w.Zoo);
+            var user = await GetCurrentUserAsync();
+
+            // Users should only see their own wishlist items
+            var applicationDbContext = _context.WishlistItems
+                                        .Include(w => w.User)
+                                        .Include(w => w.Zoo)
+                                        .Where(w => w.UserId == user.Id);
             return View(await applicationDbContext.ToListAsync());
         }
 
@@ -53,7 +59,7 @@ namespace Capstone.Controllers
         }
 
         // POST: WishlistItems/Create
-
+        // Adds a new item to a user's wishlist
         public async Task<IActionResult> Create(int? id)
         {
             var user = await GetCurrentUserAsync();
