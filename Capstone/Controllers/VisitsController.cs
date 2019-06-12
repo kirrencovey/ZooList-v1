@@ -87,7 +87,6 @@ namespace Capstone.Controllers
                 visit.UserId = user.Id;
                 _context.Add(visit);
 
-
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }

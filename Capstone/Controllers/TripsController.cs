@@ -8,17 +8,21 @@ using Microsoft.EntityFrameworkCore;
 using Capstone.Data;
 using Capstone.Models;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 
 namespace Capstone.Controllers
 {
     public class TripsController : Controller
     {
         private readonly ApplicationDbContext _context;
+        private readonly UserManager<ApplicationUser> _userManager;
 
-        public TripsController(ApplicationDbContext context)
+        public TripsController(ApplicationDbContext context, UserManager<ApplicationUser> userManager)
         {
             _context = context;
+            _userManager = userManager;
         }
+        private Task<ApplicationUser> GetCurrentUserAsync() => _userManager.GetUserAsync(HttpContext.User);
 
         // GET: Trips
         [Authorize]
@@ -62,8 +66,14 @@ namespace Capstone.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("TripId,Name,UserId")] Trip trip)
         {
+            var user = await GetCurrentUserAsync();
+
+            ModelState.Remove("UserId");
+
             if (ModelState.IsValid)
             {
+                trip.User = user;
+                trip.UserId = user.Id;
                 _context.Add(trip);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));

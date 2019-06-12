@@ -38,6 +38,7 @@
             <td>
                 <a asp-action="Details" asp-controller="Zoos" asp-route-id="@item.Zoo.ZooId">Details</a> |
                 <a asp-action="Delete" asp-route-id="@item.WishlistItemId">Delete</a> |
+                <a asp-action="Create" asp-controller="TripItems">Add to Trip</a> |
                 <a asp-action="Create" asp-controller="Visits" asp-route-id="@item.Zoo.ZooId">I've Visited!</a>
             </td>
         </tr>
