@@ -60,21 +60,32 @@ namespace Capstone.Controllers
 
         // POST: WishlistItems/Create
         // Adds a new item to a user's wishlist
+        [HttpPost]
         public async Task<IActionResult> Create(int? id)
         {
             var user = await GetCurrentUserAsync();
 
-            WishlistItem wishlistItem = new WishlistItem
+            // Check if user has already added this zoo to their wishlist
+            if (_context.WishlistItems.FirstOrDefault(x => x.ZooId == id && x.UserId == user.Id) != null)
             {
-                Zoo = _context.Zoos.FirstOrDefault(x => x.ZooId == id),
-                ZooId = _context.Zoos.FirstOrDefault(x => x.ZooId == id).ZooId,
-                User = user,
-                UserId = user.Id
-            };
-            _context.WishlistItems.Add(wishlistItem);
-            _context.SaveChanges();
+                // redirect user to the same place they were on the page for better user experience
+                return Redirect($"{Url.RouteUrl(new { controller = "Zoos", action = "Index" })}#{id}");
+            }
+            else
+            {
+                WishlistItem wishlistItem = new WishlistItem
+                {
+                    Zoo = _context.Zoos.FirstOrDefault(x => x.ZooId == id),
+                    ZooId = _context.Zoos.FirstOrDefault(x => x.ZooId == id).ZooId,
+                    User = user,
+                    UserId = user.Id
+                };
+                _context.WishlistItems.Add(wishlistItem);
+                _context.SaveChanges();
 
-            return RedirectToAction("Index", "Zoos");
+                return Redirect($"{Url.RouteUrl(new { controller = "Zoos", action = "Index" })}#{id}");
+            }
+
         }
 
         // GET: WishlistItems/Edit/5
