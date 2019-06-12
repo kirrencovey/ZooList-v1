@@ -28,28 +28,33 @@ namespace Capstone.Controllers
         [Authorize]
         public async Task<IActionResult> Index()
         {
-            var applicationDbContext = _context.Trips.Include(t => t.User);
+            var user = await GetCurrentUserAsync();
+            
+            // User should only see thier own trips
+            var applicationDbContext = _context.Trips
+                                        .Include(t => t.User)
+                                        .Where(t => t.UserId == user.Id);
             return View(await applicationDbContext.ToListAsync());
         }
 
         // GET: Trips/Details/5
-        public async Task<IActionResult> Details(int? id)
-        {
-            if (id == null)
-            {
-                return NotFound();
-            }
+        //public async Task<IActionResult> Details(int? id)
+        //{
+        //    if (id == null)
+        //    {
+        //        return NotFound();
+        //    }
 
-            var trip = await _context.Trips
-                .Include(t => t.User)
-                .FirstOrDefaultAsync(m => m.TripId == id);
-            if (trip == null)
-            {
-                return NotFound();
-            }
+        //    var trip = await _context.Trips
+        //        .Include(t => t.User)
+        //        .FirstOrDefaultAsync(m => m.TripId == id);
+        //    if (trip == null)
+        //    {
+        //        return NotFound();
+        //    }
 
-            return View(trip);
-        }
+        //    return View(trip);
+        //}
 
         // GET: Trips/Create
         [Authorize]

@@ -21,9 +21,6 @@
             @*<th>
                 @Html.DisplayNameFor(model => model.Country)
             </th>*@
-            <th>
-                @Html.DisplayNameFor(model => model.WebsiteURL)
-            </th>
             <th></th>
         </tr>
     </thead>
@@ -43,15 +40,12 @@
                 @Html.DisplayFor(modelItem => item.Country)
             </td>*@
             <td>
-                <a href=@($"{item.WebsiteURL}")>@Html.DisplayFor(modelItem => item.WebsiteURL)</a>
-            </td>
-            <td>
                 <a asp-action="Edit" asp-route-id="@item.ZooId">Edit</a> |
                 <a asp-action="Details" asp-route-id="@item.ZooId">Details</a> |
                 <br />
                 @* placing this in a form instead of an <a> allows it to be a true POST request,
                    while as an <a> it would be a GET request creating data which is not good practice *@
-                <form asp-action="Create" asp-controller="WishlistItems" asp-route-id="@item.ZooId"><input type="submit" value="Wishlist" class="btn btn-primary" /></form> |
+                <form asp-action="Create" asp-controller="WishlistItems" asp-route-id="@item.ZooId"><input type="submit" value="Wishlist" class="btn btn-primary" /></form> @*|*@
                 <br />
                 @* should redirect to form with dropdown with trips *@
                 <a asp-action="Create" asp-controller="TripItems" asp-route-id="@item.ZooId">Add to Trip</a> |

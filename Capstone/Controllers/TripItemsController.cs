@@ -7,17 +7,21 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using Capstone.Data;
 using Capstone.Models;
+using Microsoft.AspNetCore.Identity;
 
 namespace Capstone.Controllers
 {
     public class TripItemsController : Controller
     {
         private readonly ApplicationDbContext _context;
+        private readonly UserManager<ApplicationUser> _userManager;
 
-        public TripItemsController(ApplicationDbContext context)
+        public TripItemsController(ApplicationDbContext context, UserManager<ApplicationUser> userManager)
         {
             _context = context;
+            _userManager = userManager;
         }
+        private Task<ApplicationUser> GetCurrentUserAsync() => _userManager.GetUserAsync(HttpContext.User);
 
         // GET: TripItems
         public async Task<IActionResult> Index([FromRoute] int id)
@@ -53,9 +57,11 @@ namespace Capstone.Controllers
         }
 
         // GET: TripItems/Create
-        public IActionResult Create([FromRoute]int id)
+        public async Task<IActionResult> Create([FromRoute]int id)
         {
-            ViewData["TripId"] = new SelectList(_context.Trips, "TripId", "Name");
+            var user = await GetCurrentUserAsync();
+
+            ViewData["TripId"] = new SelectList(_context.Trips.Where(t => t.UserId == user.Id), "TripId", "Name");
             ViewData["Zoo"] = _context.Zoos.FirstOrDefault(z => z.ZooId == id);
             return View();
         }
