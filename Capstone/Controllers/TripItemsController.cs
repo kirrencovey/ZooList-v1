@@ -20,9 +20,15 @@ namespace Capstone.Controllers
         }
 
         // GET: TripItems
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index([FromRoute] int id)
         {
-            var applicationDbContext = _context.TripItems.Include(t => t.Trip).Include(t => t.Zoo);
+            // should display a list of zoos that are all associated with the same trip
+            var applicationDbContext = _context.TripItems
+                                        .Include(t => t.Trip)
+                                        .Include(t => t.Zoo)
+                                        .Where(t => t.TripId == id);
+            ViewData["Trip"] = _context.Trips.FirstOrDefault(t => t.TripId == id);
+
             return View(await applicationDbContext.ToListAsync());
         }
 
@@ -67,7 +73,7 @@ namespace Capstone.Controllers
                 tripItem.ZooId = _context.Zoos.FirstOrDefault(z => z.ZooId == id).ZooId;
                 _context.Add(tripItem);
                 await _context.SaveChangesAsync();
-                return RedirectToAction("Index", "Trips");
+                return RedirectToAction("Index", "Zoos");
             }
             ViewData["TripId"] = new SelectList(_context.Trips, "TripId", "Name", tripItem.TripId);
             ViewData["ZooId"] = new SelectList(_context.Zoos, "ZooId", "Name", tripItem.ZooId);
@@ -157,7 +163,7 @@ namespace Capstone.Controllers
             var tripItem = await _context.TripItems.FindAsync(id);
             _context.TripItems.Remove(tripItem);
             await _context.SaveChangesAsync();
-            return RedirectToAction(nameof(Index));
+            return RedirectToAction("Index", "Trips");
         }
 
         private bool TripItemExists(int id)
