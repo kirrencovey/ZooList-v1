@@ -112,10 +112,16 @@ namespace Capstone.Controllers
                 return NotFound();
             }
 
-            if (ModelState.IsValid)
+            var user = await GetCurrentUserAsync();
+
+            ModelState.Remove("UserId");
+
+                if (ModelState.IsValid)
             {
                 try
                 {
+                    trip.User = user;
+                    trip.UserId = user.Id;
                     _context.Update(trip);
                     await _context.SaveChangesAsync();
                 }

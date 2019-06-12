@@ -105,12 +105,14 @@ namespace Capstone.Controllers
             }
 
             var visit = await _context.Visits.FindAsync(id);
+            _context.Update(visit);
+
             if (visit == null)
             {
                 return NotFound();
             }
             ViewData["UserId"] = new SelectList(_context.Users, "Id", "Id", visit.UserId);
-            ViewData["ZooId"] = new SelectList(_context.Zoos, "ZooId", "Name", visit.ZooId);
+            ViewData["ZooId"] = new SelectList(_context.Zoos.Where(z => z.ZooId == visit.ZooId), "ZooId", "Name", visit.ZooId);
             return View(visit);
         }
 
@@ -126,10 +128,16 @@ namespace Capstone.Controllers
                 return NotFound();
             }
 
+            var user = await GetCurrentUserAsync();
+
+            ModelState.Remove("UserId");
+
             if (ModelState.IsValid)
             {
                 try
                 {
+                    visit.User = user;
+                    visit.UserId = user.Id;
                     _context.Update(visit);
                     await _context.SaveChangesAsync();
                 }
