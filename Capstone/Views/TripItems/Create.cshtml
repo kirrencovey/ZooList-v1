@@ -4,24 +4,20 @@
     ViewData["Title"] = "Create";
 }
 
-<h1>Create</h1>
+<h1>Add to Trip</h1>
 
-<h4>TripItem</h4>
+<h4>Which trip would you like to add @ViewBag.Zoo.Name to?</h4>
 <hr />
 <div class="row">
     <div class="col-md-4">
         <form asp-action="Create">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
-                <label asp-for="ZooId" class="control-label"></label>
-                <select asp-for="ZooId" class ="form-control" asp-items="ViewBag.ZooId"></select>
-            </div>
-            <div class="form-group">
-                <label asp-for="TripId" class="control-label"></label>
+                <label asp-for="TripId" class="control-label">Choose a Trip</label>
                 <select asp-for="TripId" class ="form-control" asp-items="ViewBag.TripId"></select>
             </div>
             <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-primary" />
+                <input type="submit" value="Add" class="btn btn-primary" />
             </div>
         </form>
     </div>

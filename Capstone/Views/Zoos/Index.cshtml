@@ -54,7 +54,7 @@
                 <form asp-action="Create" asp-controller="WishlistItems" asp-route-id="@item.ZooId"><input type="submit" value="Wishlist" class="btn btn-primary" /></form> |
                 <br />
                 @* should redirect to form with dropdown with trips *@
-                <a asp-action="Create" asp-controller="TripItems">Add to Trip</a> |
+                <a asp-action="Create" asp-controller="TripItems" asp-route-id="@item.ZooId">Add to Trip</a> |
                 <br />
                 @* should get user and zoo passed in, not as user input *@
                 <a asp-action="Create" asp-controller="Visits" asp-route-id="@item.ZooId">Record a Visit</a>

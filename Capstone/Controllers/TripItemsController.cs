@@ -47,10 +47,10 @@ namespace Capstone.Controllers
         }
 
         // GET: TripItems/Create
-        public IActionResult Create()
+        public IActionResult Create([FromRoute]int id)
         {
             ViewData["TripId"] = new SelectList(_context.Trips, "TripId", "Name");
-            ViewData["ZooId"] = new SelectList(_context.Zoos, "ZooId", "Name");
+            ViewData["Zoo"] = _context.Zoos.FirstOrDefault(z => z.ZooId == id);
             return View();
         }
 
@@ -59,13 +59,15 @@ namespace Capstone.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("TripItemId,ZooId,TripId")] TripItem tripItem)
+        public async Task<IActionResult> Create(int id, [Bind("TripItemId,ZooId,TripId")] TripItem tripItem)
         {
             if (ModelState.IsValid)
             {
+                tripItem.Zoo = _context.Zoos.FirstOrDefault(z => z.ZooId == id);
+                tripItem.ZooId = _context.Zoos.FirstOrDefault(z => z.ZooId == id).ZooId;
                 _context.Add(tripItem);
                 await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
+                return RedirectToAction("Index", "Trips");
             }
             ViewData["TripId"] = new SelectList(_context.Trips, "TripId", "Name", tripItem.TripId);
             ViewData["ZooId"] = new SelectList(_context.Zoos, "ZooId", "Name", tripItem.ZooId);
