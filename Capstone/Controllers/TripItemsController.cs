@@ -7,22 +7,32 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using Capstone.Data;
 using Capstone.Models;
+using Microsoft.AspNetCore.Identity;
 
 namespace Capstone.Controllers
 {
     public class TripItemsController : Controller
     {
         private readonly ApplicationDbContext _context;
+        private readonly UserManager<ApplicationUser> _userManager;
 
-        public TripItemsController(ApplicationDbContext context)
+        public TripItemsController(ApplicationDbContext context, UserManager<ApplicationUser> userManager)
         {
             _context = context;
+            _userManager = userManager;
         }
+        private Task<ApplicationUser> GetCurrentUserAsync() => _userManager.GetUserAsync(HttpContext.User);
 
         // GET: TripItems
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index([FromRoute] int id)
         {
-            var applicationDbContext = _context.TripItems.Include(t => t.Trip).Include(t => t.Zoo);
+            // should display a list of zoos that are all associated with the same trip
+            var applicationDbContext = _context.TripItems
+                                        .Include(t => t.Trip)
+                                        .Include(t => t.Zoo)
+                                        .Where(t => t.TripId == id);
+            ViewData["Trip"] = _context.Trips.FirstOrDefault(t => t.TripId == id);
+
             return View(await applicationDbContext.ToListAsync());
         }
 
@@ -47,10 +57,12 @@ namespace Capstone.Controllers
         }
 
         // GET: TripItems/Create
-        public IActionResult Create()
+        public async Task<IActionResult> Create([FromRoute]int id)
         {
-            ViewData["TripId"] = new SelectList(_context.Trips, "TripId", "Name");
-            ViewData["ZooId"] = new SelectList(_context.Zoos, "ZooId", "Name");
+            var user = await GetCurrentUserAsync();
+
+            ViewData["TripId"] = new SelectList(_context.Trips.Where(t => t.UserId == user.Id), "TripId", "Name");
+            ViewData["Zoo"] = _context.Zoos.FirstOrDefault(z => z.ZooId == id);
             return View();
         }
 
@@ -59,13 +71,15 @@ namespace Capstone.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("TripItemId,ZooId,TripId")] TripItem tripItem)
+        public async Task<IActionResult> Create(int id, [Bind("TripItemId,ZooId,TripId")] TripItem tripItem)
         {
             if (ModelState.IsValid)
             {
+                tripItem.Zoo = _context.Zoos.FirstOrDefault(z => z.ZooId == id);
+                tripItem.ZooId = _context.Zoos.FirstOrDefault(z => z.ZooId == id).ZooId;
                 _context.Add(tripItem);
                 await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
+                return RedirectToAction("Index", "Zoos");
             }
             ViewData["TripId"] = new SelectList(_context.Trips, "TripId", "Name", tripItem.TripId);
             ViewData["ZooId"] = new SelectList(_context.Zoos, "ZooId", "Name", tripItem.ZooId);
@@ -155,7 +169,7 @@ namespace Capstone.Controllers
             var tripItem = await _context.TripItems.FindAsync(id);
             _context.TripItems.Remove(tripItem);
             await _context.SaveChangesAsync();
-            return RedirectToAction(nameof(Index));
+            return RedirectToAction("Index", "Trips");
         }
 
         private bool TripItemExists(int id)

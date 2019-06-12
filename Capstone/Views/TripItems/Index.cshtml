@@ -4,11 +4,11 @@
     ViewData["Title"] = "Index";
 }
 
-<h1>Index</h1>
+<h1>@ViewBag.Trip.Name</h1>
 
-<p>
+@*<p>
     <a asp-action="Create">Create New</a>
-</p>
+</p>*@
 <table class="table">
     <thead>
         <tr>
@@ -16,7 +16,10 @@
                 @Html.DisplayNameFor(model => model.Zoo)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Trip)
+                @Html.DisplayNameFor(model => model.Zoo.City)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Zoo.State)
             </th>
             <th></th>
         </tr>
@@ -28,12 +31,16 @@
                 @Html.DisplayFor(modelItem => item.Zoo.Name)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Trip.Name)
+                @Html.DisplayFor(modelItem => item.Zoo.City)
             </td>
             <td>
-                <a asp-action="Edit" asp-route-id="@item.TripItemId">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.TripItemId">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.TripItemId">Delete</a>
+                @Html.DisplayFor(modelItem => item.Zoo.State)
+            </td>
+            <td>
+                <a asp-action="Delete" asp-route-id="@item.TripItemId">Remove From Trip</a>
+            </td>
+            <td>
+                <a asp-action="Create" asp-controller="Visits" asp-route-id="@item.ZooId">I've Visited!</a>
             </td>
         </tr>
 }

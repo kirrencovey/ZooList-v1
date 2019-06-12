@@ -8,23 +8,33 @@ using Microsoft.EntityFrameworkCore;
 using Capstone.Data;
 using Capstone.Models;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 
 namespace Capstone.Controllers
 {
     public class VisitsController : Controller
     {
         private readonly ApplicationDbContext _context;
+        private readonly UserManager<ApplicationUser> _userManager;
 
-        public VisitsController(ApplicationDbContext context)
+        public VisitsController(ApplicationDbContext context, UserManager<ApplicationUser> userManager)
         {
             _context = context;
+            _userManager = userManager;
         }
+        private Task<ApplicationUser> GetCurrentUserAsync() => _userManager.GetUserAsync(HttpContext.User);
 
         // GET: Visits
         [Authorize]
         public async Task<IActionResult> Index()
         {
-            var applicationDbContext = _context.Visits.Include(v => v.User).Include(v => v.Zoo);
+            // User should only see their own visit history
+            var user = await GetCurrentUserAsync();
+
+            var applicationDbContext = _context.Visits
+                                        .Include(v => v.User)
+                                        .Include(v => v.Zoo)
+                                        .Where(v => v.UserId == user.Id);
             return View(await applicationDbContext.ToListAsync());
         }
 
@@ -52,8 +62,9 @@ namespace Capstone.Controllers
         [Authorize]
         public IActionResult Create()
         {
-            ViewData["UserId"] = new SelectList(_context.Users, "Id", "Id");
-            ViewData["ZooId"] = new SelectList(_context.Zoos, "ZooId", "Name");
+            
+            //ViewData["UserId"] = new SelectList(_context.Users, "Id", "Id");
+            //ViewData["ZooId"] = new SelectList(_context.Zoos, "ZooId", "Name");
             return View();
         }
 
@@ -62,11 +73,20 @@ namespace Capstone.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("VisitId,Date,Comments,UserId,ZooId")] Visit visit)
+        public async Task<IActionResult> Create(int id, [Bind("VisitId,Date,Comments,UserId,ZooId,Zoo")] Visit visit)
         {
+            var user = await GetCurrentUserAsync();
+
+            ModelState.Remove("UserId");
+
             if (ModelState.IsValid)
             {
+                visit.ZooId = id;
+                visit.Zoo = _context.Zoos.FirstOrDefault(x => x.ZooId == id);
+                visit.User = user;
+                visit.UserId = user.Id;
                 _context.Add(visit);
+
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
@@ -85,12 +105,14 @@ namespace Capstone.Controllers
             }
 
             var visit = await _context.Visits.FindAsync(id);
+            _context.Update(visit);
+
             if (visit == null)
             {
                 return NotFound();
             }
             ViewData["UserId"] = new SelectList(_context.Users, "Id", "Id", visit.UserId);
-            ViewData["ZooId"] = new SelectList(_context.Zoos, "ZooId", "Name", visit.ZooId);
+            ViewData["ZooId"] = new SelectList(_context.Zoos.Where(z => z.ZooId == visit.ZooId), "ZooId", "Name", visit.ZooId);
             return View(visit);
         }
 
@@ -106,10 +128,16 @@ namespace Capstone.Controllers
                 return NotFound();
             }
 
+            var user = await GetCurrentUserAsync();
+
+            ModelState.Remove("UserId");
+
             if (ModelState.IsValid)
             {
                 try
                 {
+                    visit.User = user;
+                    visit.UserId = user.Id;
                     _context.Update(visit);
                     await _context.SaveChangesAsync();
                 }

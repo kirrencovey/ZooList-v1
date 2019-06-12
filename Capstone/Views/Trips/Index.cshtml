@@ -28,7 +28,7 @@
                 <a asp-action="Edit" asp-route-id="@item.TripId">Edit</a> |
                 @* DETAILS should reroute to a list of the tripItems on this trip
                 --OR-- this whole page should list out like productTypes on bangazon *@
-                <a asp-action="Details" asp-route-id="@item.TripId">Details</a> |
+                <a asp-action="Index" asp-controller="TripItems" asp-route-id="@item.TripId">Trip Details</a> |
                 <a asp-action="Delete" asp-route-id="@item.TripId">Delete</a>
             </td>
         </tr>
