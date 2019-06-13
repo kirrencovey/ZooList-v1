@@ -43,6 +43,27 @@ namespace Capstone.Controllers
             return View(zoo);
         }
 
+        // GET: Zoos by user search
+        public async Task<IActionResult> Search(string search)
+        {
+            List<Zoo> matchingZoos = await _context.Zoos
+                                            .Where(z => z.Name.ToUpper().Contains(search.ToUpper()) || 
+                                                        z.City.ToUpper().Contains(search.ToUpper()))
+                                            .OrderBy(z => z.Name)
+                                            .ToListAsync();
+            return View(matchingZoos);
+        }
+
+        // GET: Zoos from one state
+        public async Task<IActionResult> ZoosInState(string state)
+        {
+            List<Zoo> matchingZoos = await _context.Zoos
+                                            .Where(z => z.State.ToUpper() == state.ToUpper())
+                                            .OrderBy(z => z.City)
+                                            .ToListAsync();
+            return View(matchingZoos);
+        }
+
         // GET: Zoos/Create
         public IActionResult Create()
         {
