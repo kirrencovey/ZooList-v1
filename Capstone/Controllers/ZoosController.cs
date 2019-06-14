@@ -66,8 +66,6 @@ namespace Capstone.Controllers
 
             model = await (
                 from z in _context.Zoos
-                //join p in _context.Product
-                //on t.ProductTypeId equals p.ProductTypeId
                 group new { z } by new { z.State } into grouped
                 select new GroupedZoos
                 {
@@ -77,12 +75,12 @@ namespace Capstone.Controllers
                 }).ToListAsync();
 
             return View(model);
-
         }
 
         // GET: Zoos/State All zoos from one state
         public async Task<IActionResult> ZoosInState(string state)
         {
+            var data = RouteData.Values;
             List<Zoo> matchingZoos = await _context.Zoos
                                             .Where(z => z.State.ToUpper() == state.ToUpper())
                                             .OrderBy(z => z.City)
