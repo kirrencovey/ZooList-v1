@@ -22,7 +22,10 @@ namespace Capstone.Controllers
         // GET: Zoos
         public async Task<IActionResult> Index()
         {
-            return View(await _context.Zoos.ToListAsync());
+            return View(await _context.Zoos
+                                .OrderBy(z => z.State)
+                                .ThenBy(z => z.Name)
+                                .ToListAsync());
         }
 
         // GET: Zoos/Details/5
@@ -41,6 +44,48 @@ namespace Capstone.Controllers
             }
 
             return View(zoo);
+        }
+
+        // GET: Zoos by user search
+        public async Task<IActionResult> Search(string search)
+        {
+            List<Zoo> matchingZoos = await _context.Zoos
+                                            .Where(z => z.Name.ToUpper().Contains(search.ToUpper()) || 
+                                                        z.City.ToUpper().Contains(search.ToUpper()))
+                                            .OrderBy(z => z.State)
+                                            .ThenBy(z => z.Name)
+                                            .ToListAsync();
+            return View(matchingZoos);
+        }
+
+        // GET: Zoos grouped by state
+
+        public async Task<IActionResult> ZoosGroupedByState ()
+        {
+            List<GroupedZoos> model = new List<GroupedZoos>();
+
+            model = await (
+                from z in _context.Zoos
+                group new { z } by new { z.State } into grouped
+                select new GroupedZoos
+                {
+                    State = grouped.Key.State,
+                    ZooCount = grouped.Select(x => x.z.State).Count(),
+                    Zoos = grouped.Select(x => x.z).Take(3)
+                }).ToListAsync();
+
+            return View(model);
+        }
+
+        // GET: Zoos/State All zoos from one state
+        public async Task<IActionResult> ZoosInState(string state)
+        {
+            var data = RouteData.Values;
+            List<Zoo> matchingZoos = await _context.Zoos
+                                            .Where(z => z.State.ToUpper() == state.ToUpper())
+                                            .OrderBy(z => z.City)
+                                            .ToListAsync();
+            return View(matchingZoos);
         }
 
         // GET: Zoos/Create

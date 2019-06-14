@@ -1,0 +1,39 @@
+﻿@model IEnumerable<Capstone.Models.GroupedZoos>
+
+@{
+    ViewData["Title"] = "ZoosGroupedByState";
+}
+
+<h1>ZoosGroupedByState</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.State)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td class="alert-danger">
+                    @Html.DisplayFor(modelItem => item.State) (<a href=@($"http://localhost:5000/Zoos/ZoosInState?state={item.State}")>See All @Html.DisplayFor(modelItem => item.ZooCount) Zoos</a>)
+                </td>
+            </tr>
+            @foreach (var zoo in item.Zoos)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => zoo.Name)
+                    </td>
+                </tr>
+            }
+        }
+    </tbody>
+</table>
