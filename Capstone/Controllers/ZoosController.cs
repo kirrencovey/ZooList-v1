@@ -22,7 +22,10 @@ namespace Capstone.Controllers
         // GET: Zoos
         public async Task<IActionResult> Index()
         {
-            return View(await _context.Zoos.ToListAsync());
+            return View(await _context.Zoos
+                                .OrderBy(z => z.State)
+                                .ThenBy(z => z.Name)
+                                .ToListAsync());
         }
 
         // GET: Zoos/Details/5
@@ -49,12 +52,35 @@ namespace Capstone.Controllers
             List<Zoo> matchingZoos = await _context.Zoos
                                             .Where(z => z.Name.ToUpper().Contains(search.ToUpper()) || 
                                                         z.City.ToUpper().Contains(search.ToUpper()))
-                                            .OrderBy(z => z.Name)
+                                            .OrderBy(z => z.State)
+                                            .ThenBy(z => z.Name)
                                             .ToListAsync();
             return View(matchingZoos);
         }
 
-        // GET: Zoos from one state
+        // GET: Zoos grouped by state
+
+        public async Task<IActionResult> ZoosGroupedByState ()
+        {
+            List<GroupedZoos> model = new List<GroupedZoos>();
+
+            model = await (
+                from z in _context.Zoos
+                //join p in _context.Product
+                //on t.ProductTypeId equals p.ProductTypeId
+                group new { z } by new { z.State } into grouped
+                select new GroupedZoos
+                {
+                    State = grouped.Key.State,
+                    ZooCount = grouped.Select(x => x.z.State).Count(),
+                    Zoos = grouped.Select(x => x.z).Take(3)
+                }).ToListAsync();
+
+            return View(model);
+
+        }
+
+        // GET: Zoos/State All zoos from one state
         public async Task<IActionResult> ZoosInState(string state)
         {
             List<Zoo> matchingZoos = await _context.Zoos

@@ -61,7 +61,7 @@ namespace Capstone.Controllers
         // POST: WishlistItems/Create
         // Adds a new item to a user's wishlist
         [HttpPost]
-        public async Task<IActionResult> Create(int? id)
+        public async Task<IActionResult> Create(int id)
         {
             var user = await GetCurrentUserAsync();
 
@@ -76,7 +76,7 @@ namespace Capstone.Controllers
                 WishlistItem wishlistItem = new WishlistItem
                 {
                     Zoo = _context.Zoos.FirstOrDefault(x => x.ZooId == id),
-                    ZooId = _context.Zoos.FirstOrDefault(x => x.ZooId == id).ZooId,
+                    ZooId = id,
                     User = user,
                     UserId = user.Id
                 };
