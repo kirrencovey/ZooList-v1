@@ -4,10 +4,10 @@
     ViewData["Title"] = "Index";
 }
 
-<h1>Index</h1>
+<h1>My Trips</h1>
 
 <p>
-    <a asp-action="Create">Create A Trip</a>
+    <a asp-action="Create">Add A Trip</a>
 </p>
 <table class="table">
     <thead>
@@ -25,7 +25,7 @@
                 @Html.DisplayFor(modelItem => item.Name)
             </td>
             <td>
-                <a asp-action="Edit" asp-route-id="@item.TripId">Edit</a> |
+                <a asp-action="Edit" asp-route-id="@item.TripId">Rename</a> |
                 @* DETAILS should reroute to a list of the tripItems on this trip
                 --OR-- this whole page should list out like productTypes on bangazon *@
                 <a asp-action="Index" asp-controller="TripItems" asp-route-id="@item.TripId">Trip Details</a> |

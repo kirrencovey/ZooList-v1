@@ -169,7 +169,7 @@ namespace Capstone.Controllers
             var tripItem = await _context.TripItems.FindAsync(id);
             _context.TripItems.Remove(tripItem);
             await _context.SaveChangesAsync();
-            return RedirectToAction("Index", "Trips");
+            return RedirectToAction("Index", "TripItems");
         }
 
         private bool TripItemExists(int id)
