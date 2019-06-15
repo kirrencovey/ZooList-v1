@@ -22,12 +22,19 @@ namespace Capstone.Controllers
         // GET: Zoos
         public async Task<IActionResult> Index()
         {
-            // load facilities in a random order each time the page is loaded so users see more facilities
-            Random rnd = new Random();
- 
             return View(await _context.Zoos
-                                .OrderBy<Zoo, int>((item) => rnd.Next())
+                                .OrderBy(z => z.State)
+                                .ThenBy(z => z.Name)
                                 .ToListAsync());
+
+
+            // maybe load facilities in a random order each time the page is loaded so users see more facilities? but that messes up the continuous scroll-and-add functionality. tbd
+
+            //Random rnd = new Random();
+
+           // return View(await _context.Zoos
+           //                     .OrderBy<Zoo, int>((item) => rnd.Next())
+           //                     .ToListAsync());
         }
 
         // GET: Zoos/Details/5

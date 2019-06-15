@@ -23,6 +23,7 @@
         {
             <tr>
                 <td class="alert-danger">
+                    @* pass state name as route parameter *@
                     @Html.DisplayFor(modelItem => item.State) (<a href=@($"http://localhost:5000/Zoos/ZoosInState?state={item.State}")>See All @Html.DisplayFor(modelItem => item.ZooCount) Zoos</a>)
                 </td>
             </tr>

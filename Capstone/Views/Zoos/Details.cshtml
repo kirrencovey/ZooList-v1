@@ -55,7 +55,14 @@
     </dl>
 </div>
 <div>
-    <br /><a asp-action="Create" asp-controller="WishlistItems" asp-route-id="@Model.ZooId">Wishlist</a> |
-    <a asp-action="Create" asp-controller="TripItems">Add to Trip</a> |
+    @* placing this in a form instead of an <a> allows it to be a true POST request,
+        while as an <a> it would be a GET request creating data which is not good practice *@
+    <form asp-action="Create" asp-controller="WishlistItems" asp-route-id="@Model.ZooId"><input type="submit" value="Wishlist" class="btn btn-primary" /></form> @*|*@
+    <br />
+    @* should redirect to form with dropdown with trips *@
+    <a asp-action="Create" asp-controller="TripItems" asp-route-id="@Model.ZooId">Add to Trip</a> |
+    <br />
+    @* should get user and zoo passed in, not as user input *@
+    <a asp-action="Create" asp-controller="Visits" asp-route-id="@Model.ZooId">Record a Visit</a> |
     <a asp-action="Index">Back to List</a>
 </div>
