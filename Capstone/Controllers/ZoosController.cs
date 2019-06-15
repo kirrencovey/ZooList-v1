@@ -22,9 +22,11 @@ namespace Capstone.Controllers
         // GET: Zoos
         public async Task<IActionResult> Index()
         {
+            // load facilities in a random order each time the page is loaded so users see more facilities
+            Random rnd = new Random();
+ 
             return View(await _context.Zoos
-                                .OrderBy(z => z.State)
-                                .ThenBy(z => z.Name)
+                                .OrderBy<Zoo, int>((item) => rnd.Next())
                                 .ToListAsync());
         }
 

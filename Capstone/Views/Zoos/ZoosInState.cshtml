@@ -4,7 +4,7 @@
     ViewData["Title"] = "ZoosInState";
 }
 
-<h1>ZoosInState</h1>
+<h1>(todo: state) Zoos</h1>
 
 <table class="table">
     <thead>
@@ -14,9 +14,6 @@
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.City)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.State)
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.WebsiteURL)
@@ -34,10 +31,7 @@
                 @Html.DisplayFor(modelItem => item.City)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.State)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.WebsiteURL)
+                <a href="@Html.DisplayFor(modelItem => item.WebsiteURL)">@Html.DisplayFor(modelItem => item.WebsiteURL)</a>
             </td>
             <td>
                 <a asp-action="Details" asp-route-id="@item.ZooId">Details</a> |
