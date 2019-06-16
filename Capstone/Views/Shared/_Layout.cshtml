@@ -21,7 +21,7 @@
     <header>
         <nav class="navbar sticky-top navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
             <div class="container">
-                <a class="navbar-brand" asp-area="" asp-controller="Zoos" asp-action="Index">ZooList</a>
+                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">ZooList</a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
                         aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
@@ -29,6 +29,9 @@
                 <div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse">
                     <partial name="_LoginPartial" />
                     <ul class="navbar-nav flex-grow-1">
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Zoos" asp-action="Index">All Zoos</a>
+                        </li>
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-controller="Zoos" asp-action="ZoosGroupedByState">Zoos By State</a>
                         </li>
@@ -49,10 +52,8 @@
                             @using (Html.BeginForm("Search", "Zoos", FormMethod.Get))
                             {
                                 @Html.TextBox("Search", "", new { @class = "form-control" })
-                                <div>
-                                    <input type="submit" value="Search" />
-                                </div>
                             }
+                            <input type="submit" value="Search" />
                         </li>
                     </ul>
                 </div>
@@ -68,9 +69,14 @@
 
     <footer class="border-top footer text-muted">
         <div class="container">
-            &copy; 2019 - ZooList - <a href="https://www.kirrencovey.com">Kirren Covey</a> - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+            &copy; 2019 - ZooList - <a href="https://www.kirrencovey.com">Kirren Covey</a> @*- Icons from <a href="https://fontawesome.com/license">FontAwesome</a>*@
+            <a class="float-right" asp-area="Identity" asp-page="/Account/Manage/Index" title="Manage">Profile/Settings</a>
         </div>
     </footer>
+
+    @* FONTAWESOME *@
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+    @*             *@
 
     <environment include="Development">
         <script src="~/lib/jquery/dist/jquery.js"></script>

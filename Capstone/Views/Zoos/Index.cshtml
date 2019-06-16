@@ -1,5 +1,6 @@
 ﻿@model IEnumerable<Capstone.Models.Zoo>
 
+
 @{
     ViewData["Title"] = "Index";
 }
@@ -20,10 +21,10 @@
             </th>
             @*<th>
             @Html.DisplayNameFor(model => model.Country)
-        </th>*@
+        </th>
             <th>
                 @Html.DisplayNameFor(model => model.WebsiteURL)
-            </th>
+            </th>*@
             <th></th>
         </tr>
     </thead>
@@ -43,22 +44,15 @@
             @Html.DisplayFor(modelItem => item.Country)
         </td>*@
             <td>
-                <a href="@Html.DisplayFor(modelItem => item.WebsiteURL)">@Html.DisplayFor(modelItem => item.WebsiteURL)</a>
-            </td>
-            <td>
                 <a asp-action="Edit" asp-route-id="@item.ZooId">Edit</a> |
                 <a asp-action="Delete" asp-route-id="@item.ZooId">Delete</a> |
-                <a asp-action="Details" asp-route-id="@item.ZooId">Details</a> |
+                @*<a asp-action="Details" asp-route-id="@item.ZooId">Details</a> |*@
                 <br />
-                @* placing this in a form instead of an <a> allows it to be a true POST request,
-            while as an <a> it would be a GET request creating data which is not good practice *@
-                <form asp-action="Create" asp-controller="WishlistItems" asp-route-id="@item.ZooId"><input type="submit" value="Wishlist" class="btn btn-primary" /></form> @*|*@
-                <br />
-                @* should redirect to form with dropdown with trips *@
-                <a asp-action="Create" asp-controller="TripItems" asp-route-id="@item.ZooId">Add to Trip</a> |
-                <br />
-                @* should get user and zoo passed in, not as user input *@
-                <a asp-action="Create" asp-controller="Visits" asp-route-id="@item.ZooId">Record a Visit</a>
+                @* placing this in a form instead of an <a> allows it to be a true POST request, while as an <a> it would be a GET request creating data which is not good practice *@
+                <form asp-action="Create" asp-controller="WishlistItems" asp-route-id="@item.ZooId"><button type="submit" class="btn btn-primary"><i class="fas fa-star"></i></button></form> 
+                <a class="btn btn-primary" href="@Html.DisplayFor(modelItem => item.WebsiteURL)" target="_blank"><i class="fas fa-external-link-alt"></i></a>
+                <a class="btn btn-primary" asp-action="Create" asp-controller="TripItems" asp-route-id="@item.ZooId"><i class="fas fa-plus"></i> Trip</a>
+                <a class="btn btn-primary" asp-action="Create" asp-controller="Visits" asp-route-id="@item.ZooId"><i class="fas fa-check"></i> Visited</a>
             </td>
         </tr>
 }

@@ -62,7 +62,7 @@ namespace Capstone.Controllers
                                             .Where(z => z.Name.ToUpper().Contains(search.ToUpper()) || 
                                                         z.City.ToUpper().Contains(search.ToUpper()))
                                             .OrderBy(z => z.State)
-                                            .ThenBy(z => z.Name)
+                                            //.ThenBy(z => z.Name)
                                             .ToListAsync();
             return View(matchingZoos);
         }
@@ -73,6 +73,9 @@ namespace Capstone.Controllers
         {
             List<GroupedZoos> model = new List<GroupedZoos>();
 
+            // randomize order of zoos so that different zoos will populate below each state on reload
+            Random rnd = new Random();
+
             model = await (
                 from z in _context.Zoos
                 group new { z } by new { z.State } into grouped
@@ -80,7 +83,7 @@ namespace Capstone.Controllers
                 {
                     State = grouped.Key.State,
                     ZooCount = grouped.Select(x => x.z.State).Count(),
-                    Zoos = grouped.Select(x => x.z).Take(3)
+                    Zoos = grouped.Select(x => x.z).OrderBy<Zoo, int>((item) => rnd.Next()).Take(3)
                 }).ToListAsync();
 
             return View(model);
