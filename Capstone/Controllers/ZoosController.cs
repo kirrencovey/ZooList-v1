@@ -97,6 +97,8 @@ namespace Capstone.Controllers
                                             .Where(z => z.State.ToUpper() == state.ToUpper())
                                             .OrderBy(z => z.City)
                                             .ToListAsync();
+            ViewBag.State = state;
+
             return View(matchingZoos);
         }
 
@@ -129,7 +131,7 @@ namespace Capstone.Controllers
             {
                 return NotFound();
             }
-
+            
             var zoo = await _context.Zoos.FindAsync(id);
             if (zoo == null)
             {

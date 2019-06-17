@@ -7,17 +7,14 @@
 
 <h1>Zoos</h1>
 
-<table class="table">
+<table>
     <thead>
         <tr>
             <th>
                 @Html.DisplayNameFor(model => model.Name)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.City)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.State)
+                Location
             </th>
             @*<th>
             @Html.DisplayNameFor(model => model.Country)
@@ -25,34 +22,35 @@
             <th>
                 @Html.DisplayNameFor(model => model.WebsiteURL)
             </th>*@
-            <th></th>
         </tr>
     </thead>
-    <tbody>
+    <tbody  class="table">
 @foreach (var item in Model) {
         <tr id="@item.ZooId">
             <td>
-                @Html.DisplayFor(modelItem => item.Name)
+                <a class="btn" href="@Html.DisplayFor(modelItem => item.WebsiteURL)" target="_blank">@Html.DisplayFor(modelItem => item.Name)</a>
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.City)
+                @Html.DisplayFor(modelItem => item.City), @Html.DisplayFor(modelItem => item.State)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.State)
+                @* placing this in a form instead of an <a> allows it to be a true POST request, while as an <a> it would be a GET request creating data which is not good practice *@
+                <form asp-action="Create" asp-controller="WishlistItems" asp-route-id="@item.ZooId"><button type="submit" class="btn"><i class="fas fa-star"></i></button></form>
+            </td>
+            <td>
+                <a class="btn" asp-action="Create" asp-controller="TripItems" asp-route-id="@item.ZooId"><i class="fas fa-plus"></i> Trip</a>
+            </td>
+            <td>
+                <a class="btn" asp-action="Create" asp-controller="Visits" asp-route-id="@item.ZooId"><i class="fas fa-check"></i> Visited</a>
             </td>
             @*<td>
             @Html.DisplayFor(modelItem => item.Country)
         </td>*@
             <td>
-                <a asp-action="Edit" asp-route-id="@item.ZooId">Edit</a> |
-                <a asp-action="Delete" asp-route-id="@item.ZooId">Delete</a> |
+                @* users shouldn't  be able to edit or delete
+            <a asp-action="Edit" asp-route-id="@item.ZooId">Edit</a> |
+            <a asp-action="Delete" asp-route-id="@item.ZooId">Delete</a> |*@
                 @*<a asp-action="Details" asp-route-id="@item.ZooId">Details</a> |*@
-                <br />
-                @* placing this in a form instead of an <a> allows it to be a true POST request, while as an <a> it would be a GET request creating data which is not good practice *@
-                <form asp-action="Create" asp-controller="WishlistItems" asp-route-id="@item.ZooId"><button type="submit" class="btn btn-primary"><i class="fas fa-star"></i></button></form> 
-                <a class="btn btn-primary" href="@Html.DisplayFor(modelItem => item.WebsiteURL)" target="_blank"><i class="fas fa-external-link-alt"></i></a>
-                <a class="btn btn-primary" asp-action="Create" asp-controller="TripItems" asp-route-id="@item.ZooId"><i class="fas fa-plus"></i> Trip</a>
-                <a class="btn btn-primary" asp-action="Create" asp-controller="Visits" asp-route-id="@item.ZooId"><i class="fas fa-check"></i> Visited</a>
             </td>
         </tr>
 }

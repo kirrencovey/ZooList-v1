@@ -9,38 +9,32 @@
 @*<p>
     <a asp-action="Create">Create New</a>
 </p>*@
-<table class="table">
+<table>
     <thead>
         <tr>
             <th>
                 @Html.DisplayNameFor(model => model.Zoo)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Zoo.City)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Zoo.State)
+                Location
             </th>
             <th></th>
         </tr>
     </thead>
-    <tbody>
+    <tbody class="table">
 @foreach (var item in Model) {
         <tr>
             <td>
                 @Html.DisplayFor(modelItem => item.Zoo.Name)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Zoo.City)
+                @Html.DisplayFor(modelItem => item.Zoo.City), @Html.DisplayFor(modelItem => item.Zoo.State)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Zoo.State)
+                <a class="btn" asp-action="Delete" asp-route-id="@item.TripItemId"><i class="far fa-trash-alt"></i></a>
             </td>
             <td>
-                <a asp-action="Delete" asp-route-id="@item.TripItemId">Remove From Trip</a>
-            </td>
-            <td>
-                <a asp-action="Create" asp-controller="Visits" asp-route-id="@item.ZooId">Record a Visit</a>
+                <a class="btn" asp-action="Create" asp-controller="Visits" asp-route-id="@item.ZooId"><i class="fas fa-check"></i> Visited</a>
             </td>
         </tr>
 }
