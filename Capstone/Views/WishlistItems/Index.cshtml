@@ -24,22 +24,19 @@
 @foreach (var item in Model) {
         <tr>
             <td>
-                @Html.DisplayFor(modelItem => item.Zoo.Name)
+                <a class="btn btn-plain" href="@Html.DisplayFor(modelItem => item.Zoo.WebsiteURL)" target="_blank">@Html.DisplayFor(modelItem => item.Zoo.Name)</a>
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Zoo.City), @Html.DisplayFor(modelItem => item.Zoo.State)
             </td>
             <td>
-                <a class="btn" asp-action="Delete" asp-route-id="@item.WishlistItemId"><i class="far fa-trash-alt"></i></a>
+                <a class="btn btn-plain" asp-action="Delete" asp-route-id="@item.WishlistItemId"><i class="far fa-trash-alt"></i></a>
             </td>
             <td>
-                <a class="btn" href="@Html.DisplayFor(modelItem => item.Zoo.WebsiteURL)" target="_blank"><i class="fas fa-external-link-alt"></i></a>
+                <a class="btn btn-plain" asp-action="Create" asp-controller="TripItems" asp-route-id="@item.ZooId"><i class="fas fa-plus"></i> Trip</a>
             </td>
             <td>
-                <a class="btn" asp-action="Create" asp-controller="TripItems" asp-route-id="@item.ZooId"><i class="fas fa-plus"></i> Trip</a>
-            </td>
-            <td>
-                <a class="btn" asp-action="Create" asp-controller="Visits" asp-route-id="@item.ZooId"><i class="fas fa-check"></i> Visited</a>
+                <a class="btn btn-plain" asp-action="Create" asp-controller="Visits" asp-route-id="@item.ZooId"><i class="fas fa-check"></i> Visited</a>
             </td>
         </tr>
 }

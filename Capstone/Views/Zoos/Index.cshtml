@@ -5,7 +5,7 @@
     ViewData["Title"] = "Index";
 }
 
-<h1>Zoos</h1>
+<h1>All Zoos</h1>
 
 <table>
     <thead>
@@ -16,36 +16,27 @@
             <th>
                 Location
             </th>
-            @*<th>
-            @Html.DisplayNameFor(model => model.Country)
-        </th>
-            <th>
-                @Html.DisplayNameFor(model => model.WebsiteURL)
-            </th>*@
         </tr>
     </thead>
     <tbody  class="table">
 @foreach (var item in Model) {
         <tr id="@item.ZooId">
             <td>
-                <a class="btn" href="@Html.DisplayFor(modelItem => item.WebsiteURL)" target="_blank">@Html.DisplayFor(modelItem => item.Name)</a>
+                <a class="btn btn-plain" href="@Html.DisplayFor(modelItem => item.WebsiteURL)" target="_blank">@Html.DisplayFor(modelItem => item.Name)</a>
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.City), @Html.DisplayFor(modelItem => item.State)
             </td>
             <td>
                 @* placing this in a form instead of an <a> allows it to be a true POST request, while as an <a> it would be a GET request creating data which is not good practice *@
-                <form asp-action="Create" asp-controller="WishlistItems" asp-route-id="@item.ZooId"><button type="submit" class="btn"><i class="fas fa-star"></i></button></form>
+                <form asp-action="Create" asp-controller="WishlistItems" asp-route-id="@item.ZooId"><button type="submit" class="btn btn-plain"><i class="fas fa-star"></i></button></form>
             </td>
             <td>
-                <a class="btn" asp-action="Create" asp-controller="TripItems" asp-route-id="@item.ZooId"><i class="fas fa-plus"></i> Trip</a>
+                <a class="btn btn-plain" asp-action="Create" asp-controller="TripItems" asp-route-id="@item.ZooId"><i class="fas fa-plus"></i> Trip</a>
             </td>
             <td>
-                <a class="btn" asp-action="Create" asp-controller="Visits" asp-route-id="@item.ZooId"><i class="fas fa-check"></i> Visited</a>
+                <a class="btn btn-plain" asp-action="Create" asp-controller="Visits" asp-route-id="@item.ZooId"><i class="fas fa-check"></i> Visited</a>
             </td>
-            @*<td>
-            @Html.DisplayFor(modelItem => item.Country)
-        </td>*@
             <td>
                 @* users shouldn't  be able to edit or delete
             <a asp-action="Edit" asp-route-id="@item.ZooId">Edit</a> |

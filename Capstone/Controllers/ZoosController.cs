@@ -92,6 +92,9 @@ namespace Capstone.Controllers
         // GET: Zoos/State All zoos from one state
         public async Task<IActionResult> ZoosInState(string state)
         {
+            // states with two-word names from route have a - instead of space separating, so fix this
+            state = state.Replace('-', ' ');
+
             var data = RouteData.Values;
             List<Zoo> matchingZoos = await _context.Zoos
                                             .Where(z => z.State.ToUpper() == state.ToUpper())
