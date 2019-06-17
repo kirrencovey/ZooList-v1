@@ -69,3 +69,7 @@ a:hover,
 .btn-plain:hover {
     color: darkcyan;
 }
+
+.search {
+    display: flex;
+}
