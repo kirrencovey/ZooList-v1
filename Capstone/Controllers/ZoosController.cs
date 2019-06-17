@@ -62,7 +62,7 @@ namespace Capstone.Controllers
                                             .Where(z => z.Name.ToUpper().Contains(search.ToUpper()) || 
                                                         z.City.ToUpper().Contains(search.ToUpper()))
                                             .OrderBy(z => z.State)
-                                            .ThenBy(z => z.Name)
+                                            //.ThenBy(z => z.Name)
                                             .ToListAsync();
             return View(matchingZoos);
         }
@@ -73,6 +73,9 @@ namespace Capstone.Controllers
         {
             List<GroupedZoos> model = new List<GroupedZoos>();
 
+            // randomize order of zoos so that different zoos will populate below each state on reload
+            Random rnd = new Random();
+
             model = await (
                 from z in _context.Zoos
                 group new { z } by new { z.State } into grouped
@@ -80,7 +83,7 @@ namespace Capstone.Controllers
                 {
                     State = grouped.Key.State,
                     ZooCount = grouped.Select(x => x.z.State).Count(),
-                    Zoos = grouped.Select(x => x.z).Take(3)
+                    Zoos = grouped.Select(x => x.z).OrderBy<Zoo, int>((item) => rnd.Next()).Take(3)
                 }).ToListAsync();
 
             return View(model);
@@ -89,11 +92,16 @@ namespace Capstone.Controllers
         // GET: Zoos/State All zoos from one state
         public async Task<IActionResult> ZoosInState(string state)
         {
+            // states with two-word names from route have a - instead of space separating, so fix this
+            state = state.Replace('-', ' ');
+
             var data = RouteData.Values;
             List<Zoo> matchingZoos = await _context.Zoos
                                             .Where(z => z.State.ToUpper() == state.ToUpper())
                                             .OrderBy(z => z.City)
                                             .ToListAsync();
+            ViewBag.State = state;
+
             return View(matchingZoos);
         }
 
@@ -126,7 +134,7 @@ namespace Capstone.Controllers
             {
                 return NotFound();
             }
-
+            
             var zoo = await _context.Zoos.FindAsync(id);
             if (zoo == null)
             {

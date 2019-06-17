@@ -4,37 +4,54 @@
     ViewData["Title"] = "ZoosGroupedByState";
 }
 
-<h1>ZoosGroupedByState</h1>
+<h1>Zoos By State</h1>
 
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.State)
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var item in Model)
-        {
+<div>
+                <table>
+    @foreach (var item in Model)
+    {
+        <thead>
             <tr>
-                <td class="alert-danger">
-                    @* pass state name as route parameter *@
-                    @Html.DisplayFor(modelItem => item.State) (<a href=@($"http://localhost:5000/Zoos/ZoosInState?state={item.State}")>See All @Html.DisplayFor(modelItem => item.ZooCount) Zoos</a>)
+                <td class="state-name">
+                    @Html.DisplayFor(modelItem => item.State)
                 </td>
             </tr>
-            @foreach (var zoo in item.Zoos)
-            {
-                <tr>
-                    <td>
-                        @Html.DisplayFor(modelItem => zoo.Name)
-                    </td>
-                </tr>
-            }
-        }
-    </tbody>
-</table>
+            <tr>
+                @if (item.ZooCount > 3)
+                {
+                     @* states with two-word names won't route correctly unless the space is removed *@
+                     var state = item.State.Replace(' ', '-');
+                        
+
+                    @* pass state name as route parameter *@
+                    <td>(<a href=@($"http://localhost:5000/Zoos/ZoosInState?state={state}")>See All @Html.DisplayFor(modelItem => item.ZooCount)</a>)</td>
+                }
+            </tr>
+            </thead>
+                    <tbody class="table">
+                        @foreach (var zoo in item.Zoos)
+                        {
+                            <tr>
+                                <td>
+                                    <a class="btn btn-plain" href="@Html.DisplayFor(modelItem => zoo.WebsiteURL)" target="_blank">@Html.DisplayFor(modelItem => zoo.Name)</a>
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => zoo.City)
+                                </td>
+                                <td>
+                                    @* placing this in a form instead of an <a> allows it to be a true POST request, while as an <a> it would be a GET request creating data which is not good practice *@
+                                    <form asp-action="Create" asp-controller="WishlistItems" asp-route-id="@zoo.ZooId"><button type="submit" class="btn"><i class="fas fa-star"></i></button></form>
+                                </td>
+                                <td>
+                                    <a class="btn" asp-action="Create" asp-controller="TripItems" asp-route-id="@zoo.ZooId"><i class="fas fa-plus"></i> Trip</a>
+                                </td>
+                                <td>
+                                    <a class="btn" asp-action="Create" asp-controller="Visits" asp-route-id="@zoo.ZooId"><i class="fas fa-check"></i> Visited</a>
+                                </td>
+
+                            </tr>
+                        }
+                    </tbody>
+                }
+                </table>
+    </div>

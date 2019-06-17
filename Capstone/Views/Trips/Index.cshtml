@@ -9,7 +9,7 @@
 <p>
     <a asp-action="Create">Add A Trip</a>
 </p>
-<table class="table">
+<table>
     <thead>
         <tr>
             <th>
@@ -18,18 +18,20 @@
             <th></th>
         </tr>
     </thead>
-    <tbody>
+    <tbody class="table">
 @foreach (var item in Model) {
         <tr>
             <td>
                 @Html.DisplayFor(modelItem => item.Name)
             </td>
             <td>
-                <a asp-action="Edit" asp-route-id="@item.TripId">Rename</a> |
-                @* DETAILS should reroute to a list of the tripItems on this trip
-                --OR-- this whole page should list out like productTypes on bangazon *@
-                <a asp-action="Index" asp-controller="TripItems" asp-route-id="@item.TripId">Trip Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.TripId">Delete</a>
+                <a class="btn btn-plain" asp-action="Edit" asp-route-id="@item.TripId"><i class="fas fa-edit"></i></a>
+            </td>
+            <td>
+                <a class="btn btn-plain" asp-action="Index" asp-controller="TripItems" asp-route-id="@item.TripId"><i class="fas fa-info-circle"></i></a>
+            </td>
+            <td>
+                <a class="btn btn-plain" asp-action="Delete" asp-route-id="@item.TripId"><i class="far fa-trash-alt"></i></a>
             </td>
         </tr>
 }

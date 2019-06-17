@@ -9,37 +9,34 @@
 @*<p>
     <a asp-action="Create">Add A Zoo</a>
 </p>*@
-<table class="table">
+<table>
     <thead>
         <tr>
             <th>
                 @Html.DisplayNameFor(model => model.Zoo)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Zoo.City)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Zoo.State)
+                Location
             </th>
         </tr>
     </thead>
-    <tbody>
+    <tbody class="table">
 @foreach (var item in Model) {
         <tr>
             <td>
-                @Html.DisplayFor(modelItem => item.Zoo.Name)
+                <a class="btn btn-plain" href="@Html.DisplayFor(modelItem => item.Zoo.WebsiteURL)" target="_blank">@Html.DisplayFor(modelItem => item.Zoo.Name)</a>
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Zoo.City)
+                @Html.DisplayFor(modelItem => item.Zoo.City), @Html.DisplayFor(modelItem => item.Zoo.State)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Zoo.State)
+                <a class="btn btn-plain" asp-action="Delete" asp-route-id="@item.WishlistItemId"><i class="far fa-trash-alt"></i></a>
             </td>
             <td>
-                <a asp-action="Details" asp-controller="Zoos" asp-route-id="@item.Zoo.ZooId">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.WishlistItemId">Delete</a> |
-                <a asp-action="Create" asp-controller="TripItems" asp-route-id="@item.ZooId">Add to Trip</a>  |
-                <a asp-action="Create" asp-controller="Visits" asp-route-id="@item.Zoo.ZooId">I've Visited!</a>
+                <a class="btn btn-plain" asp-action="Create" asp-controller="TripItems" asp-route-id="@item.ZooId"><i class="fas fa-plus"></i> Trip</a>
+            </td>
+            <td>
+                <a class="btn btn-plain" asp-action="Create" asp-controller="Visits" asp-route-id="@item.ZooId"><i class="fas fa-check"></i> Visited</a>
             </td>
         </tr>
 }
