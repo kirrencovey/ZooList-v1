@@ -64,6 +64,12 @@ namespace Capstone.Controllers
         {
             var user = await GetCurrentUserAsync();
 
+            // check if user has existing trips. if not, direct to create trip form
+            if (_context.Trips.Where(t => t.UserId == user.Id).Count() == 0)
+            {
+                return RedirectToAction("Create", "Trips");
+            }
+
             ViewData["TripId"] = new SelectList(_context.Trips.Where(t => t.UserId == user.Id), "TripId", "Name");
             ViewData["Zoo"] = _context.Zoos.FirstOrDefault(z => z.ZooId == id);
             return View();
