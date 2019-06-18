@@ -21,8 +21,8 @@
         @foreach (var item in Model)
         {
             <thead>
-                <tr id="@item.State">
-                    <td class="state-name">
+                <tr>
+                    <td id="@item.State" class="state-name">
                         @Html.DisplayFor(modelItem => item.State)
                     </td>
                 </tr>

@@ -60,6 +60,8 @@ body {
 
 .state-name {
     font-size: 2rem;
+    padding-top: 50px;
+    margin-top: -50px;
 }
 
 .state-letters {
@@ -75,6 +77,11 @@ body {
 .state-letters > a {
     padding: 0px 10px;
     font-weight: bold;
+}
+
+.zoo-item {
+    padding-top: 50px;
+    margin-top: -50px;
 }
 
 .btn-plain {

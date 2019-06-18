@@ -20,8 +20,8 @@
     </thead>
     <tbody  class="table">
 @foreach (var item in Model) {
-        <tr id="@item.ZooId">
-            <td>
+        <tr>
+            <td id="@item.ZooId" class="zoo-item">
                 <a class="btn btn-plain" href="@Html.DisplayFor(modelItem => item.WebsiteURL)" target="_blank">@Html.DisplayFor(modelItem => item.Name)</a>
             </td>
             <td>
