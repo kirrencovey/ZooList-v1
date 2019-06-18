@@ -44,7 +44,7 @@ html {
 body {
   /* Margin bottom by footer height */
   margin-bottom: 60px;
-  padding-top: 60px;
+  padding-top: 60px;;
 }
 .footer {
   position: absolute;
@@ -58,10 +58,16 @@ body {
 
 /**/
 
+h1, h2, h3,
+h4, h5, h6 {
+    font-weight: 400;
+}
+
 .state-name {
     font-size: 2rem;
     padding-top: 50px;
     margin-top: -50px;
+    font-weight: 200;
 }
 
 .state-letters {
@@ -85,7 +91,11 @@ body {
 }
 
 .btn-plain {
-    padding: 0!important;
+    padding: 0 !important;
+}
+
+.zoo-name {
+    color: black;
 }
 
 a:hover,
@@ -127,5 +137,5 @@ th {
     font-weight: bold;
     padding-left: 12px;
     text-transform: uppercase;
-    color: #343a40;
+    color: #7a7b7b;
 }
