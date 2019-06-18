@@ -22,16 +22,13 @@
 @foreach (var item in Model) {
         <tr>
             <td>
-                @Html.DisplayFor(modelItem => item.Name)
+                <a class="btn btn-plain" asp-action="Index" asp-controller="TripItems" asp-route-id="@item.TripId">@Html.DisplayFor(modelItem => item.Name)</a>
             </td>
             <td>
+                <div class="icons">
                 <a class="btn btn-plain" asp-action="Edit" asp-route-id="@item.TripId"><i class="fas fa-edit"></i></a>
-            </td>
-            <td>
-                <a class="btn btn-plain" asp-action="Index" asp-controller="TripItems" asp-route-id="@item.TripId"><i class="fas fa-info-circle"></i></a>
-            </td>
-            <td>
                 <a class="btn btn-plain" asp-action="Delete" asp-route-id="@item.TripId"><i class="far fa-trash-alt"></i></a>
+                </div>
             </td>
         </tr>
 }

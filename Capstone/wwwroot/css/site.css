@@ -67,9 +67,26 @@ body {
 
 a:hover,
 .btn-plain:hover {
-    color: darkcyan;
+    color: #17a2b8;
 }
 
 .search {
     display: flex;
+}
+
+main {
+    max-width: 95%;
+    margin: auto;
+}
+
+table {
+    width: 100%;
+}
+
+.icons {
+    float: right !important;
+}
+
+.icons > a {
+    margin-left: 10px;
 }

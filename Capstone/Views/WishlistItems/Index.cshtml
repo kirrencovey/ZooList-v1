@@ -30,13 +30,11 @@
                 @Html.DisplayFor(modelItem => item.Zoo.City), @Html.DisplayFor(modelItem => item.Zoo.State)
             </td>
             <td>
-                <a class="btn btn-plain" asp-action="Delete" asp-route-id="@item.WishlistItemId"><i class="far fa-trash-alt"></i></a>
-            </td>
-            <td>
-                <a class="btn btn-plain" asp-action="Create" asp-controller="TripItems" asp-route-id="@item.ZooId"><i class="fas fa-plus"></i> Trip</a>
-            </td>
-            <td>
-                <a class="btn btn-plain" asp-action="Create" asp-controller="Visits" asp-route-id="@item.ZooId"><i class="fas fa-check"></i> Visited</a>
+                <div class="icons">
+                    <a class="btn btn-plain" asp-action="Delete" asp-route-id="@item.WishlistItemId"><i class="far fa-trash-alt"></i></a>
+                    <a class="btn btn-plain" asp-action="Create" asp-controller="TripItems" asp-route-id="@item.ZooId"><i class="fas fa-plus"></i> Trip</a>
+                    <a class="btn btn-plain" asp-action="Create" asp-controller="Visits" asp-route-id="@item.ZooId"><i class="fas fa-check"></i> Visited</a>
+                    </div>
             </td>
         </tr>
 }

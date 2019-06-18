@@ -29,7 +29,7 @@
                 <div>
                     @using (Html.BeginForm("Search", "Zoos", FormMethod.Get))
                     {
-                        @Html.TextBox("Search", "search", new { @class = "form-control" })
+                        @Html.TextBox("Search", "", new { @class = "form-control" })
                     }
                 </div>
                 <div>
@@ -44,22 +44,19 @@
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav mr-auto">
                     <li class="nav-item">
-                        <a class="nav-link text-dark" asp-area="" asp-controller="Zoos" asp-action="Index">See All Zoos</a>
+                        <a class="nav-link" asp-area="" asp-controller="Zoos" asp-action="ZoosGroupedByState">Zoos By State</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link text-dark" asp-area="" asp-controller="Zoos" asp-action="ZoosGroupedByState">Zoos By State</a>
+                        <a class="nav-link" asp-area="" asp-controller="WishlistItems" asp-action="Index">Wishlist</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link text-dark" asp-area="" asp-controller="WishlistItems" asp-action="Index">Wishlist</a>
+                        <a class="nav-link" asp-area="" asp-controller="Trips" asp-action="Create">New Trip</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link text-dark" asp-area="" asp-controller="Trips" asp-action="Create">New Trip</a>
+                        <a class="nav-link" asp-area="" asp-controller="Trips" asp-action="Index">My Trips</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link text-dark" asp-area="" asp-controller="Trips" asp-action="Index">My Trips</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link text-dark" asp-area="" asp-controller="Visits" asp-action="Index">Visit History</a>
+                        <a class="nav-link" asp-area="" asp-controller="Visits" asp-action="Index">Visit History</a>
                     </li>
                 </ul>
             </div>

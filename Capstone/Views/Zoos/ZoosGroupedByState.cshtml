@@ -39,6 +39,7 @@
                                     @Html.DisplayFor(modelItem => zoo.City)
                                 </td>
                                 <td>
+
                                     @* placing this in a form instead of an <a> allows it to be a true POST request, while as an <a> it would be a GET request creating data which is not good practice *@
                                     <form asp-action="Create" asp-controller="WishlistItems" asp-route-id="@zoo.ZooId"><button type="submit" class="btn"><i class="fas fa-star"></i></button></form>
                                 </td>

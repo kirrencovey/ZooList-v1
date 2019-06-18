@@ -19,9 +19,6 @@
                 @Html.DisplayNameFor(model => model.Zoo)
             </th>
             <th>
-                Location
-            </th>
-            <th>
                 @Html.DisplayNameFor(model => model.Comments)
             </th>
         </tr>
@@ -36,16 +33,13 @@
                 @Html.DisplayFor(modelItem => item.Zoo.Name)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Zoo.City), @Html.DisplayFor(modelItem => item.Zoo.State)
-            </td>
-            <td>
                 @Html.DisplayFor(modelItem => item.Comments)
             </td>
             <td>
-                <a class="btn btn-plain" asp-action="Edit" asp-route-id="@item.VisitId"><i class="fas fa-edit"></i></a>
-            </td>
-            <td>
-                <a class="btn btn-plain" asp-action="Delete" asp-route-id="@item.VisitId"><i class="far fa-trash-alt"></i></a>
+                <div class="icons">
+                    <a class="btn btn-plain" asp-action="Edit" asp-route-id="@item.VisitId"><i class="fas fa-edit"></i></a>
+                    <a class="btn btn-plain" asp-action="Delete" asp-route-id="@item.VisitId"><i class="far fa-trash-alt"></i></a>
+                    </div>
             </td>
         </tr>
 }
