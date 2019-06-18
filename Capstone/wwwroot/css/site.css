@@ -2,58 +2,65 @@
 for details on configuring this project to bundle and minify static web assets. */
 
 a.navbar-brand {
-  white-space: normal;
-  text-align: center;
-  word-break: break-all;
+    white-space: normal;
+    text-align: center;
+    word-break: break-all;
+}
+
+.navbar {
+    padding: 1.2rem 1rem !important;
 }
 
 /* Sticky footer styles
 -------------------------------------------------- */
 html {
-  font-size: 14px;
+    font-size: 14px;
 }
+
 @media (min-width: 768px) {
-  html {
-    font-size: 16px;
-  }
+    html {
+        font-size: 16px;
+    }
 }
 
 .border-top {
-  border-top: 1px solid #e5e5e5;
+    border-top: 1px solid #e5e5e5;
 }
+
 .border-bottom {
-  border-bottom: 1px solid #e5e5e5;
+    border-bottom: 1px solid #e5e5e5;
 }
 
 .box-shadow {
-  box-shadow: 0 .25rem .75rem rgba(0, 0, 0, .05);
+    box-shadow: 0 .25rem .75rem rgba(0, 0, 0, .05);
 }
 
 button.accept-policy {
-  font-size: 1rem;
-  line-height: inherit;
+    font-size: 1rem;
+    line-height: inherit;
 }
 
 /* Sticky footer styles
 -------------------------------------------------- */
 html {
-  position: relative;
-  min-height: 100%;
+    position: relative;
+    min-height: 100%;
 }
 
 body {
-  /* Margin bottom by footer height */
-  margin-bottom: 60px;
-  padding-top: 60px;;
+    /* Margin bottom by footer height */
+    margin-bottom: 60px;
+    padding-top: 90px;
 }
+
 .footer {
-  position: absolute;
-  bottom: 0;
-  width: 100%;
-  white-space: nowrap;
-  /* Set the fixed height of the footer here */
-  height: 60px;
-  line-height: 60px; /* Vertically center the text there */
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    white-space: nowrap;
+    /* Set the fixed height of the footer here */
+    height: 60px;
+    line-height: 60px; /* Vertically center the text there */
 }
 
 /**/
@@ -65,8 +72,7 @@ h4, h5, h6 {
 
 .state-name {
     font-size: 2rem;
-    padding-top: 50px;
-    margin-top: -50px;
+    padding-top: 70px;
     font-weight: 200;
 }
 
@@ -99,6 +105,7 @@ h4, h5, h6 {
 }
 
 a:hover,
+btn:hover,
 .btn-plain:hover {
     color: #17a2b8;
 }
@@ -120,13 +127,17 @@ table {
     width: 100%;
 }
 
+.icon {
+    height: 15px;
+}
+
 .icons {
     float: right !important;
 }
 
-.icons > a {
-    margin-left: 10px;
-}
+    .icons > a {
+        margin-left: 10px;
+    }
 
 a {
     color: #17a2b8;

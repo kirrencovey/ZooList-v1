@@ -21,13 +21,13 @@
     <header>
 
 
-        <nav class="navbar fixed-top navbar-light bg-light">
+        <nav class="navbar fixed-top navbar-dark bg-dark">
             <a class="navbar-brand" asp-area="" asp-controller="Zoos" asp-action="Index">ZooList</a>
 
             @* search bar in nav - users can search by name or location *@
             <form asp-controller="Zoos" asp-action="Search" class="search">
-            <input type="text" class="form-control" id="Search" name="Search"/>
-            <input type="submit" value="Search" class="btn btn-outline-info search-btn" /
+                <input type="text" class="form-control" id="Search" name="Search" />
+                <input type="submit" value="Search" class="btn btn-info search-btn" /
             </form>
 
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -37,22 +37,22 @@
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav mr-auto">
                     <li class="nav-item">
-                        <a class="nav-link text-dark" asp-area="" asp-controller="Zoos" asp-action="Index">See All Zoos</a>
+                        <a class="nav-link text-light" asp-area="" asp-controller="Zoos" asp-action="Index">See All Zoos</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link text-dark" asp-area="" asp-controller="Zoos" asp-action="ZoosGroupedByState">Zoos By State</a>
+                        <a class="nav-link text-light" asp-area="" asp-controller="Zoos" asp-action="ZoosGroupedByState">Zoos By State</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link text-dark" asp-area="" asp-controller="WishlistItems" asp-action="Index">Wishlist</a>
+                        <a class="nav-link text-light" asp-area="" asp-controller="WishlistItems" asp-action="Index">Wishlist</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link text-dark" asp-area="" asp-controller="Trips" asp-action="Create">New Trip</a>
+                        <a class="nav-link text-light" asp-area="" asp-controller="Trips" asp-action="Create">New Trip</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link text-dark" asp-area="" asp-controller="Trips" asp-action="Index">My Trips</a>
+                        <a class="nav-link text-light" asp-area="" asp-controller="Trips" asp-action="Index">My Trips</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link text-dark" asp-area="" asp-controller="Visits" asp-action="Index">Visit History</a>
+                        <a class="nav-link text-light" asp-area="" asp-controller="Visits" asp-action="Index">Visit History</a>
                     </li>
                     <partial name="_LoginPartial" />
                 </ul>
@@ -70,7 +70,7 @@
 
     <footer class="border-top footer text-muted">
         <div class="container">
-            &copy; 2019 - ZooList - <a href="https://www.kirrencovey.com">Kirren Covey</a> @*- Icons from <a href="https://fontawesome.com/license">FontAwesome</a>*@
+            &copy; 2019 - ZooList - <a href="https://www.kirrencovey.com">Kirren Covey</a>
             <a class="float-right" asp-area="Identity" asp-page="/Account/Manage/Index" title="Manage">Profile/Settings</a>
         </div>
     </footer>

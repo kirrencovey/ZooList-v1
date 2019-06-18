@@ -41,26 +41,25 @@
             <tbody class="table">
                 @foreach (var zoo in item.Zoos)
                 {
-                    <tr>
-                        <td>
-                            <a class="btn btn-plain " href="@Html.DisplayFor(modelItem => zoo.WebsiteURL)" target="_blank">@Html.DisplayFor(modelItem => zoo.Name)</a>
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => zoo.City)
-                        </td>
-                        <td>
+                <tr>
+                    <td>
+                        <a class="btn btn-plain " href="@Html.DisplayFor(modelItem => zoo.WebsiteURL)" target="_blank">@Html.DisplayFor(modelItem => zoo.Name)</a>
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => zoo.City)
+                    </td>
+                    <td>
+                        @* placing this in a form instead of an <a> allows it to be a true POST request, while as an <a> it would be a GET request creating data which is not good practice *@
+                        <form asp-action="Create" asp-controller="WishlistItems" asp-route-id="@zoo.ZooId"><button type="submit" class="btn btn-plain"><i class="fas fa-star"></i></button></form>
+                    </td>
+                    <td>
+                        <a class="btn btn-plain" asp-action="Create" asp-controller="TripItems" asp-route-id="@zoo.ZooId"><i class="fas fa-plus"></i> Trip</a>
+                    </td>
+                    <td>
+                        <a class="btn btn-plain" asp-action="Create" asp-controller="Visits" asp-route-id="@zoo.ZooId"><i class="fas fa-check"></i> Visited</a>
+                    </td>
 
-                            @* placing this in a form instead of an <a> allows it to be a true POST request, while as an <a> it would be a GET request creating data which is not good practice *@
-                            <form asp-action="Create" asp-controller="WishlistItems" asp-route-id="@zoo.ZooId"><button type="submit" class="btn"><i class="fas fa-star"></i></button></form>
-                        </td>
-                        <td>
-                            <a class="btn" asp-action="Create" asp-controller="TripItems" asp-route-id="@zoo.ZooId"><i class="fas fa-plus"></i> Trip</a>
-                        </td>
-                        <td>
-                            <a class="btn" asp-action="Create" asp-controller="Visits" asp-route-id="@zoo.ZooId"><i class="fas fa-check"></i> Visited</a>
-                        </td>
-
-                    </tr>
+                </tr>
                 }
             </tbody>
         }
