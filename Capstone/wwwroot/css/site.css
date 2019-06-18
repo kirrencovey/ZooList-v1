@@ -74,6 +74,10 @@ a:hover,
     display: flex;
 }
 
+.search-btn {
+    margin-left: 10px;
+}
+
 main {
     max-width: 95%;
     margin: auto;

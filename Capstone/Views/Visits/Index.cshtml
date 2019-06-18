@@ -36,10 +36,10 @@
                 @Html.DisplayFor(modelItem => item.Comments)
             </td>
             <td>
-                <div class="icons">
-                    <a class="btn btn-plain" asp-action="Edit" asp-route-id="@item.VisitId"><i class="fas fa-edit"></i></a>
-                    <a class="btn btn-plain" asp-action="Delete" asp-route-id="@item.VisitId"><i class="far fa-trash-alt"></i></a>
-                    </div>
+                <a class="btn btn-plain" asp-action="Edit" asp-route-id="@item.VisitId"><i class="fas fa-edit"></i></a>
+            </td>
+            <td>
+                <a class="btn btn-plain" asp-action="Delete" asp-route-id="@item.VisitId"><i class="far fa-trash-alt"></i></a>
             </td>
         </tr>
 }
