@@ -34,7 +34,8 @@ namespace Capstone.Controllers
             var applicationDbContext = _context.WishlistItems
                                         .Include(w => w.User)
                                         .Include(w => w.Zoo)
-                                        .Where(w => w.UserId == user.Id);
+                                        .Where(w => w.UserId == user.Id)
+                                        .OrderBy(w => w.Zoo.State);
             return View(await applicationDbContext.ToListAsync());
         }
 
@@ -60,6 +61,7 @@ namespace Capstone.Controllers
 
         // POST: WishlistItems/Create
         // Adds a new item to a user's wishlist
+        [Authorize]
         [HttpPost]
         public async Task<IActionResult> Create(int id)
         {
@@ -88,62 +90,6 @@ namespace Capstone.Controllers
 
         }
 
-        // GET: WishlistItems/Edit/5
-        [Authorize]
-        public async Task<IActionResult> Edit(int? id)
-        {
-            if (id == null)
-            {
-                return NotFound();
-            }
-
-            var wishlistItem = await _context.WishlistItems.FindAsync(id);
-            if (wishlistItem == null)
-            {
-                return NotFound();
-            }
-            ViewData["UserId"] = new SelectList(_context.Users, "Id", "Id", wishlistItem.UserId);
-            ViewData["ZooId"] = new SelectList(_context.Zoos, "ZooId", "Name", wishlistItem.ZooId);
-            return View(wishlistItem);
-        }
-
-        // POST: WishlistItems/Edit/5
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("WishlistItemId,UserId,ZooId")] WishlistItem wishlistItem)
-        {
-            if (id != wishlistItem.WishlistItemId)
-            {
-                return NotFound();
-            }
-
-            if (ModelState.IsValid)
-            {
-                try
-                {
-                    _context.Update(wishlistItem);
-                    await _context.SaveChangesAsync();
-                }
-                catch (DbUpdateConcurrencyException)
-                {
-                    if (!WishlistItemExists(wishlistItem.WishlistItemId))
-                    {
-                        return NotFound();
-                    }
-                    else
-                    {
-                        throw;
-                    }
-                }
-                return RedirectToAction(nameof(Index));
-            }
-            ViewData["UserId"] = new SelectList(_context.Users, "Id", "Id", wishlistItem.UserId);
-            ViewData["ZooId"] = new SelectList(_context.Zoos, "ZooId", "Name", wishlistItem.ZooId);
-            return View(wishlistItem);
-        }
-
         // GET: WishlistItems/Delete/5
         [Authorize]
         public async Task<IActionResult> Delete(int? id)
@@ -166,6 +112,7 @@ namespace Capstone.Controllers
         }
 
         // POST: WishlistItems/Delete/5
+        [Authorize]
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)

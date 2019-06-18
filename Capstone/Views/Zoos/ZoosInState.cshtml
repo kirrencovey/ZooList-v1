@@ -28,13 +28,17 @@
                 @Html.DisplayFor(modelItem => item.City)
             </td>
             <td>
-                <div class="icons">
-                    @* placing this in a form instead of an <a> allows it to be a true POST request, while as an <a> it would be a GET request creating data which is not good practice *@
-                    <form asp-action="Create" asp-controller="WishlistItems" asp-route-id="@item.ZooId"><button type="submit" class="btn"><i class="fas fa-star"></i></button></form>
+                @* placing this in a form instead of an <a> allows it to be a true POST request, while as an <a> it would be a GET request creating data which is not good practice *@
+                <form asp-action="Create" asp-controller="WishlistItems" asp-route-id="@item.ZooId"><button type="submit" class="btn"><i class="fas fa-star"></i></button></form>
+            </td>
+            <td>
                 <a class="btn" href="@Html.DisplayFor(modelItem => item.WebsiteURL)" target="_blank"><i class="fas fa-external-link-alt"></i></a>
+            </td>
+            <td>
                 <a class="btn" asp-action="Create" asp-controller="TripItems" asp-route-id="@item.ZooId"><i class="fas fa-plus"></i> Trip</a>
+            </td>
+            <td>
                 <a class="btn" asp-action="Create" asp-controller="Visits" asp-route-id="@item.ZooId"><i class="fas fa-check"></i> Visited</a>
-                    </div>
             </td>
 
         </tr>

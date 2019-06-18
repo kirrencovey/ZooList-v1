@@ -13,7 +13,7 @@
               asp-fallback-href="~/lib/bootstrap/dist/css/bootstrap.min.css"
               asp-fallback-test-class="sr-only" asp-fallback-test-property="position" asp-fallback-test-value="absolute"
               crossorigin="anonymous"
-              integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"/>
+              integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" />
     </environment>
     <link rel="stylesheet" href="~/css/site.css" />
 </head>
@@ -44,20 +44,24 @@
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav mr-auto">
                     <li class="nav-item">
-                        <a class="nav-link" asp-area="" asp-controller="Zoos" asp-action="ZoosGroupedByState">Zoos By State</a>
+                        <a class="nav-link text-dark" asp-area="" asp-controller="Zoos" asp-action="Index">See All Zoos</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" asp-area="" asp-controller="WishlistItems" asp-action="Index">Wishlist</a>
+                        <a class="nav-link text-dark" asp-area="" asp-controller="Zoos" asp-action="ZoosGroupedByState">Zoos By State</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" asp-area="" asp-controller="Trips" asp-action="Create">New Trip</a>
+                        <a class="nav-link text-dark" asp-area="" asp-controller="WishlistItems" asp-action="Index">Wishlist</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" asp-area="" asp-controller="Trips" asp-action="Index">My Trips</a>
+                        <a class="nav-link text-dark" asp-area="" asp-controller="Trips" asp-action="Create">New Trip</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" asp-area="" asp-controller="Visits" asp-action="Index">Visit History</a>
+                        <a class="nav-link text-dark" asp-area="" asp-controller="Trips" asp-action="Index">My Trips</a>
                     </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-dark" asp-area="" asp-controller="Visits" asp-action="Index">Visit History</a>
+                    </li>
+                    <partial name="_LoginPartial"></partial>
                 </ul>
             </div>
         </nav>

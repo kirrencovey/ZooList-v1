@@ -94,3 +94,14 @@ table {
 .icons > a {
     margin-left: 10px;
 }
+
+a {
+    color: #17a2b8;
+}
+
+th {
+    font-size: .8em;
+    font-weight: bold;
+    padding-left: 12px;
+    text-transform: uppercase;
+}
