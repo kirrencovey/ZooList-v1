@@ -90,61 +90,6 @@ namespace Capstone.Controllers
             return View(tripItem);
         }
 
-        //// GET: TripItems/Edit/5
-        //public async Task<IActionResult> Edit(int? id)
-        //{
-        //    if (id == null)
-        //    {
-        //        return NotFound();
-        //    }
-
-        //    var tripItem = await _context.TripItems.FindAsync(id);
-        //    if (tripItem == null)
-        //    {
-        //        return NotFound();
-        //    }
-        //    ViewData["TripId"] = new SelectList(_context.Trips, "TripId", "Name", tripItem.TripId);
-        //    ViewData["ZooId"] = new SelectList(_context.Zoos, "ZooId", "Name", tripItem.ZooId);
-        //    return View(tripItem);
-        //}
-
-        //// POST: TripItems/Edit/5
-        //// To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        //// more details see http://go.microsoft.com/fwlink/?LinkId=317598.
-        //[HttpPost]
-        //[ValidateAntiForgeryToken]
-        //public async Task<IActionResult> Edit(int id, [Bind("TripItemId,ZooId,TripId")] TripItem tripItem)
-        //{
-        //    if (id != tripItem.TripItemId)
-        //    {
-        //        return NotFound();
-        //    }
-
-        //    if (ModelState.IsValid)
-        //    {
-        //        try
-        //        {
-        //            _context.Update(tripItem);
-        //            await _context.SaveChangesAsync();
-        //        }
-        //        catch (DbUpdateConcurrencyException)
-        //        {
-        //            if (!TripItemExists(tripItem.TripItemId))
-        //            {
-        //                return NotFound();
-        //            }
-        //            else
-        //            {
-        //                throw;
-        //            }
-        //        }
-        //        return RedirectToAction(nameof(Index));
-        //    }
-        //    ViewData["TripId"] = new SelectList(_context.Trips, "TripId", "Name", tripItem.TripId);
-        //    ViewData["ZooId"] = new SelectList(_context.Zoos, "ZooId", "Name", tripItem.ZooId);
-        //    return View(tripItem);
-        //}
-
         // GET: TripItems/Delete/5
         [Authorize]
         public async Task<IActionResult> Delete(int? id)
@@ -175,7 +120,7 @@ namespace Capstone.Controllers
             var tripItem = await _context.TripItems.FindAsync(id);
             _context.TripItems.Remove(tripItem);
             await _context.SaveChangesAsync();
-            return RedirectToAction("Index", "TripItems");
+            return RedirectToAction("Index", "Trips");
         }
 
         private bool TripItemExists(int id)

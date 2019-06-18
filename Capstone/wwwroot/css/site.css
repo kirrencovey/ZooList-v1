@@ -44,6 +44,7 @@ html {
 body {
   /* Margin bottom by footer height */
   margin-bottom: 60px;
+  padding-top: 60px;
 }
 .footer {
   position: absolute;
@@ -104,4 +105,5 @@ th {
     font-weight: bold;
     padding-left: 12px;
     text-transform: uppercase;
+    color: #343a40;
 }
