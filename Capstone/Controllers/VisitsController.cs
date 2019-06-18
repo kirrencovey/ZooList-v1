@@ -34,7 +34,8 @@ namespace Capstone.Controllers
             var applicationDbContext = _context.Visits
                                         .Include(v => v.User)
                                         .Include(v => v.Zoo)
-                                        .Where(v => v.UserId == user.Id);
+                                        .Where(v => v.UserId == user.Id)
+                                        .OrderByDescending(v => v.Date);
             return View(await applicationDbContext.ToListAsync());
         }
 

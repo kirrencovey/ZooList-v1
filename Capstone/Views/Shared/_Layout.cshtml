@@ -25,17 +25,10 @@
             <a class="navbar-brand" asp-area="" asp-controller="Zoos" asp-action="Index">ZooList</a>
 
             @* search bar in nav - users can search by name or location *@
-            <div class="search">
-                <div>
-                    @using (Html.BeginForm("Search", "Zoos", FormMethod.Get))
-                    {
-                        @Html.TextBox("Search", "", new { @class = "form-control" })
-                    }
-                </div>
-                <div>
-                    <input type="submit" value="Search" class="btn btn-outline-info search-btn" />
-                </div>
-            </div>
+            <form asp-controller="Zoos" asp-action="Search" class="search">
+            <input type="text" class="form-control" id="Search" name="Search"/>
+            <input type="submit" value="Search" class="btn btn-outline-info search-btn" /
+            </form>
 
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
@@ -61,7 +54,7 @@
                     <li class="nav-item">
                         <a class="nav-link text-dark" asp-area="" asp-controller="Visits" asp-action="Index">Visit History</a>
                     </li>
-                    <partial name="_LoginPartial"></partial>
+                    <partial name="_LoginPartial" />
                 </ul>
             </div>
         </nav>
