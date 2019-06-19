@@ -15,8 +15,8 @@
             <div class="card-body">
                 <a class="btn btn-plain" href="@Html.DisplayFor(modelItem => item.WebsiteURL)" target="_blank"><h5 class="card-title">@Html.DisplayFor(modelItem => item.Name)</h5></a>
                 <h6 class="card-subtitle mb-2 text-muted">@Html.DisplayFor(modelItem => item.City), @Html.DisplayFor(modelItem => item.State)</h6>
+                    <form class="star" asp-action="Create" asp-controller="WishlistItems" asp-route-id="@item.ZooId"><button type="submit" class="btn btn-plain"><i class="fas fa-star"></i></button></form>
                 <div class="icons">
-                    <form asp-action="Create" asp-controller="WishlistItems" asp-route-id="@item.ZooId"><button type="submit" class="btn btn-plain"><i class="fas fa-star"></i></button></form>
                     <a class="btn btn-plain" asp-action="Create" asp-controller="TripItems" asp-route-id="@item.ZooId"><i class="fas fa-plus"></i> Trip</a>
                     <a class="btn btn-plain" asp-action="Create" asp-controller="Visits" asp-route-id="@item.ZooId"><i class="fas fa-check"></i> Visited</a>
                     @* users shouldn't  be able to edit or delete but I can turn this on as needed
