@@ -78,9 +78,10 @@ h4, h5, h6 {
 
 .state-letters {
     position: fixed;
-    bottom: 400;
+    bottom: 580px;
     right: 0;
     font-size: .8em;
+    z-index: 1;
 }
 
 .title {
