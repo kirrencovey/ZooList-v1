@@ -6,42 +6,20 @@
 
 <h1>Visit History</h1>
 
-@*<p>
-    <a asp-action="Create">Record A Visit</a>
-</p>*@
-<table>
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.Date)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Zoo)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Comments)
-            </th>
-        </tr>
-    </thead>
-    <tbody class="table">
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Date)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Zoo.Name)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Comments)
-            </td>
-            <td>
-                <a class="btn btn-plain" asp-action="Edit" asp-route-id="@item.VisitId"><i class="fas fa-edit"></i></a>
-            </td>
-            <td>
-                <a class="btn btn-plain" asp-action="Delete" asp-route-id="@item.VisitId"><i class="far fa-trash-alt"></i></a>
-            </td>
-        </tr>
-}
-    </tbody>
-</table>
+<div class="card-container">
+
+    @foreach (var item in Model)
+    {
+        <div class="card" style="width: 18rem;">
+            <div class="card-body">
+                <h5 class="card-title">@Html.DisplayFor(modelItem => item.Zoo.Name)</h5>
+                <h6 class="card-subtitle mb-2 text-muted">@Html.DisplayFor(modelItem => item.Date)</h6>
+                <p class="card-text">@Html.DisplayFor(modelItem => item.Comments)</p>
+                <div class="icons">
+                    <a class="btn btn-plain" asp-action="Edit" asp-route-id="@item.VisitId"><i class="fas fa-edit"></i></a>
+                    <a class="btn btn-plain" asp-action="Delete" asp-route-id="@item.VisitId"><i class="far fa-trash-alt"></i></a>
+                </div>
+            </div>
+        </div>
+    }
+</div>

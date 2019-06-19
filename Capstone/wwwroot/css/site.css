@@ -77,13 +77,14 @@ h4, h5, h6 {
 }
 
 .state-letters {
-    margin-top: 23px;
+    position: fixed;
+    bottom: 400;
+    right: 0;
     font-size: .8em;
 }
 
 .title {
-    display: flex;
-    justify-content: space-between;
+    margin-bottom: -20px;
 }
 
 .state-letters > a {
@@ -91,10 +92,10 @@ h4, h5, h6 {
     font-weight: bold;
 }
 
-.zoo-item {
+/*.zoo-item {
     padding-top: 50px;
     margin-top: -50px;
-}
+}*/
 
 .btn-plain {
     padding: 0 !important;
@@ -150,3 +151,27 @@ th {
     text-transform: uppercase;
     color: #7a7b7b;
 }
+
+/* CARD STYLES */
+
+.card-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+}
+
+.card {
+    flex-basis: 31%;
+    margin-bottom: 22px;
+    margin-right: 22px;
+}
+
+.by-state-card {
+    margin-bottom: -20px;
+}
+
+.card-title {
+    text-align: left !important;
+}
+
+/* *********** */
