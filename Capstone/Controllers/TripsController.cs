@@ -37,25 +37,6 @@ namespace Capstone.Controllers
             return View(await applicationDbContext.ToListAsync());
         }
 
-        // GET: Trips/Details/5
-        //public async Task<IActionResult> Details(int? id)
-        //{
-        //    if (id == null)
-        //    {
-        //        return NotFound();
-        //    }
-
-        //    var trip = await _context.Trips
-        //        .Include(t => t.User)
-        //        .FirstOrDefaultAsync(m => m.TripId == id);
-        //    if (trip == null)
-        //    {
-        //        return NotFound();
-        //    }
-
-        //    return View(trip);
-        //}
-
         // GET: Trips/Create
         [Authorize]
         public IActionResult Create()

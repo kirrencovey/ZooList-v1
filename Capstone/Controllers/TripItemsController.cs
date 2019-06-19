@@ -8,6 +8,7 @@ using Microsoft.EntityFrameworkCore;
 using Capstone.Data;
 using Capstone.Models;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Authorization;
 
 namespace Capstone.Controllers
 {
@@ -24,6 +25,7 @@ namespace Capstone.Controllers
         private Task<ApplicationUser> GetCurrentUserAsync() => _userManager.GetUserAsync(HttpContext.User);
 
         // GET: TripItems
+        [Authorize]
         public async Task<IActionResult> Index([FromRoute] int id)
         {
             // should display a list of zoos that are all associated with the same trip
@@ -57,9 +59,16 @@ namespace Capstone.Controllers
         }
 
         // GET: TripItems/Create
+        [Authorize]
         public async Task<IActionResult> Create([FromRoute]int id)
         {
             var user = await GetCurrentUserAsync();
+
+            // check if user has existing trips. if not, direct to create trip form
+            if (_context.Trips.Where(t => t.UserId == user.Id).Count() == 0)
+            {
+                return RedirectToAction("Create", "Trips");
+            }
 
             ViewData["TripId"] = new SelectList(_context.Trips.Where(t => t.UserId == user.Id), "TripId", "Name");
             ViewData["Zoo"] = _context.Zoos.FirstOrDefault(z => z.ZooId == id);
@@ -69,6 +78,7 @@ namespace Capstone.Controllers
         // POST: TripItems/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
+        [Authorize]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create(int id, [Bind("TripItemId,ZooId,TripId")] TripItem tripItem)
@@ -86,62 +96,8 @@ namespace Capstone.Controllers
             return View(tripItem);
         }
 
-        // GET: TripItems/Edit/5
-        public async Task<IActionResult> Edit(int? id)
-        {
-            if (id == null)
-            {
-                return NotFound();
-            }
-
-            var tripItem = await _context.TripItems.FindAsync(id);
-            if (tripItem == null)
-            {
-                return NotFound();
-            }
-            ViewData["TripId"] = new SelectList(_context.Trips, "TripId", "Name", tripItem.TripId);
-            ViewData["ZooId"] = new SelectList(_context.Zoos, "ZooId", "Name", tripItem.ZooId);
-            return View(tripItem);
-        }
-
-        // POST: TripItems/Edit/5
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("TripItemId,ZooId,TripId")] TripItem tripItem)
-        {
-            if (id != tripItem.TripItemId)
-            {
-                return NotFound();
-            }
-
-            if (ModelState.IsValid)
-            {
-                try
-                {
-                    _context.Update(tripItem);
-                    await _context.SaveChangesAsync();
-                }
-                catch (DbUpdateConcurrencyException)
-                {
-                    if (!TripItemExists(tripItem.TripItemId))
-                    {
-                        return NotFound();
-                    }
-                    else
-                    {
-                        throw;
-                    }
-                }
-                return RedirectToAction(nameof(Index));
-            }
-            ViewData["TripId"] = new SelectList(_context.Trips, "TripId", "Name", tripItem.TripId);
-            ViewData["ZooId"] = new SelectList(_context.Zoos, "ZooId", "Name", tripItem.ZooId);
-            return View(tripItem);
-        }
-
         // GET: TripItems/Delete/5
+        [Authorize]
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -162,6 +118,7 @@ namespace Capstone.Controllers
         }
 
         // POST: TripItems/Delete/5
+        [Authorize]
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
@@ -169,7 +126,7 @@ namespace Capstone.Controllers
             var tripItem = await _context.TripItems.FindAsync(id);
             _context.TripItems.Remove(tripItem);
             await _context.SaveChangesAsync();
-            return RedirectToAction("Index", "TripItems");
+            return RedirectToAction("Index", "Trips");
         }
 
         private bool TripItemExists(int id)

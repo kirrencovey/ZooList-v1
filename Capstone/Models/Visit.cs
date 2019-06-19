@@ -10,6 +10,7 @@ namespace Capstone.Models
     {
         [Key]
         public int VisitId { get; set; }
+        [DataType(DataType.Date)]
         public DateTime? Date { get; set; }
         public string Comments { get; set; }
         public ApplicationUser User { get; set; }
