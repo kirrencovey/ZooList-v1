@@ -78,19 +78,21 @@ h4, h5, h6 {
 
 .state-letters {
     position: fixed;
-    bottom: 580px;
+    bottom: 581px;
     right: 0;
     font-size: .8em;
     z-index: 1;
-}
-
-.title {
-    margin-bottom: -20px;
+    background-color: white;
+    padding: 3px;
 }
 
 .state-letters > a {
     padding: 0px 10px;
     font-weight: bold;
+}
+
+.title {
+    margin-bottom: -20px;
 }
 
 /*.zoo-item {
@@ -129,18 +131,6 @@ table {
     width: 100%;
 }
 
-.icon {
-    height: 15px;
-}
-
-.icons {
-    float: right !important;
-}
-
-    .icons > a {
-        margin-left: 10px;
-    }
-
 a {
     color: #17a2b8;
 }
@@ -163,6 +153,7 @@ th {
 
 .card {
     flex-basis: 31%;
+    min-height: 170px;
     margin-bottom: 22px;
     margin-right: 22px;
 }
@@ -173,6 +164,25 @@ th {
 
 .card-title {
     text-align: left !important;
+}
+
+.card-text {
+    padding-bottom: 10px;
+}
+
+.icons {
+    display: flex;
+    position: absolute;
+    bottom: 20px;
+    right: 20px;
+}
+
+    .icons > a {
+        margin-left: 15px;
+    }
+
+.icon {
+    height: 15px;
 }
 
 /* *********** */
