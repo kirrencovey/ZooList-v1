@@ -1,0 +1,243 @@
+﻿/* Please see documentation at https://docs.microsoft.com/aspnet/core/client-side/bundling-and-minification
+for details on configuring this project to bundle and minify static web assets. */
+
+a.navbar-brand {
+    white-space: normal;
+    text-align: center;
+    word-break: break-all;
+    font-size: 30px;
+    font-family: 'Kaushan Script', cursive;
+
+    /*
+    font-family: 'Swanky and Moo Moo', cursive;
+    font-family: 'Lobster', cursive;
+    font-family: 'Satisfy', cursive;
+    font-family: 'Marck Script', cursive;
+*/
+}
+
+.logo {
+    height: 35px;
+    margin-right: 10px;
+    padding-bottom: 3px;
+}
+
+.navbar {
+    padding: .8rem 1rem !important;
+}
+
+/* Sticky footer styles
+-------------------------------------------------- */
+html {
+    font-size: 14px;
+}
+
+@media (min-width: 768px) {
+    html {
+        font-size: 16px;
+    }
+}
+
+.border-top {
+    border-top: 1px solid #e5e5e5;
+}
+
+.border-bottom {
+    border-bottom: 1px solid #e5e5e5;
+}
+
+.box-shadow {
+    box-shadow: 0 .25rem .75rem rgba(0, 0, 0, .05);
+}
+
+button.accept-policy {
+    font-size: 1rem;
+    line-height: inherit;
+}
+
+/* Sticky footer styles
+-------------------------------------------------- */
+html {
+    position: relative;
+    min-height: 100%;
+}
+
+body {
+    /* Margin bottom by footer height */
+    margin-bottom: 60px;
+    padding-top: 90px;
+    background-image: url(../images/drops-feather-feathers-66875.jpg);
+    background-repeat: no-repeat;
+    background-size: 1270px auto;
+    background-attachment: fixed;
+    /*background-position: bottom;*/
+}
+
+.footer {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    white-space: nowrap;
+    /* Set the fixed height of the footer here */
+    height: 60px;
+    line-height: 60px; /* Vertically center the text there */
+}
+
+/**/
+
+h1, h2, 
+h3, h4 {
+    font-weight: 400;
+    color: white;
+    padding-left: 10px;
+}
+
+h1, h2 {
+    font-family: 'Acme', sans-serif;
+}
+
+h1 {
+    font-size: 42px;
+}
+
+/* STATE VIEW STYLES */
+.state-count {
+    padding-left: 10px!important;
+    font-size: .9rem;
+    color: white;
+    margin: 2px!important;
+}
+
+.state-name {
+    font-size: 2rem;
+    padding-top: 70px;
+    font-weight: 200;
+    margin-bottom: -2px;
+}
+
+.state-letters {
+    position: fixed;
+    bottom: 583px;
+    right: 0;
+    font-size: .8em;
+    z-index: 1;
+    background-color: white;
+    padding: 3px 3px 3px 10px;
+    border-radius: 5px;
+}
+
+    .state-letters > a {
+        padding: 0px 10px;
+        font-weight: bold;
+    }
+
+.title {
+    margin-bottom: -35px;
+}
+
+/* ***************** */
+
+
+.btn-plain {
+    padding: 0 !important;
+}
+
+.zoo-name {
+    color: black;
+}
+
+a:hover,
+btn:hover,
+.btn-plain:hover {
+    color: #17a2b8;
+}
+
+.search {
+    display: flex;
+    margin-left: -100px;
+}
+
+.search > form > .btn {
+    margin-top: -5px;
+}
+
+#Search {
+    line-height: 2;
+    border-radius: 3px;
+}
+
+.search-btn {
+    margin-left: 10px;
+}
+
+main {
+    max-width: 98%;
+}
+
+table {
+    width: 100%;
+}
+
+a {
+    color: #17a2b8;
+}
+
+.modal-header {
+    border-radius: 0.3rem;
+}
+
+/* CARD STYLES */
+
+.card-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+}
+
+.card {
+    flex-basis: 31%;
+    min-height: 170px;
+    margin: 0 12px 25px 13px;
+    transition: all .1s ease-in-out;
+}
+
+    .card:hover {
+
+        transform: scale(1.1);
+    }
+
+
+.by-state-card {
+    margin-bottom: -40px;
+}
+
+.card-title {
+    text-align: left !important;
+}
+
+.card-text {
+    padding-bottom: 10px;
+}
+
+.icons {
+    display: flex;
+    position: absolute;
+    bottom: 20px;
+    right: 20px;
+}
+
+    .icons > a {
+        margin-left: 15px;
+    }
+
+.icon {
+    height: 15px;
+}
+
+.star {
+    float: left;
+    position: absolute;
+    bottom: 20px;
+}
+
+/* *********** */

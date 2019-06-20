@@ -1,0 +1,19 @@
+﻿@model Capstone.Models.Trip
+
+@{
+    ViewData["Title"] = "Delete";
+}
+
+<h1>Wait!</h1>
+
+<h3>Are you sure you want to delete @Html.DisplayFor(model => model.Name) from your trip list?</h3>
+<div>
+    <hr />
+
+    
+    <form asp-action="Delete">
+        <input type="hidden" asp-for="TripId" />
+        <input type="submit" value="Delete" class="btn btn-danger" /> |
+        <a asp-action="Index">Back to List</a>
+    </form>
+</div>

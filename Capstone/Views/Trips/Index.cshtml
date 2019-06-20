@@ -1,0 +1,30 @@
+﻿@model IEnumerable<Capstone.Models.Trip>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>My Trips</h1>
+
+<p>
+    <a asp-action="Create">Add A Trip</a>
+</p>
+
+<div class="card-container">
+
+    @foreach (var item in Model)
+    {
+        <div class="card" style="width: 18rem;">
+            <div class="card-body">
+                <h5 class="card-title">@Html.DisplayFor(modelItem => item.Name)</h5>
+                <a class="btn btn-plain" asp-action="Index" asp-controller="TripItems" asp-route-id="@item.TripId">
+                    <h6 class="card-subtitle mb-2" style="color: #17a2b8">See Zoos (@(item.TripItems.Count()))</h6>
+                </a>
+                <div class="icons">
+                    <a class="btn btn-plain" asp-action="Edit" asp-route-id="@item.TripId"><i class="fas fa-edit"></i></a>
+                    <a class="btn btn-plain" asp-action="Delete" asp-route-id="@item.TripId"><i class="far fa-trash-alt"></i></a>
+                </div>
+</div>
+        </div>
+    }
+</div>

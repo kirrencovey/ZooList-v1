@@ -1,0 +1,16 @@
+﻿@model Capstone.Models.WishlistItem
+
+@{
+    ViewData["Title"] = "Delete";
+}
+
+<h1>Wait!</h1>
+
+<h3>Are you sure you want to remove @Html.DisplayFor(model => model.Zoo.Name) from your wishlist?</h3>
+<div>
+    <form asp-action="Delete">
+        <input type="hidden" asp-for="WishlistItemId" />
+        <input type="submit" value="Delete" class="btn btn-outline-info" />
+        <a class="btn btn-outline-info" asp-action="Index">Cancel</a>
+    </form>
+</div>
