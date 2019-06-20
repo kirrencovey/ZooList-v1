@@ -51,7 +51,8 @@ namespace Capstone.Controllers
         {
             List<Zoo> matchingZoos = await _context.Zoos
                                             .Where(z => z.Name.ToUpper().Contains(search.ToUpper()) || 
-                                                        z.City.ToUpper().Contains(search.ToUpper()))
+                                                        z.City.ToUpper().Contains(search.ToUpper()) ||
+                                                        z.State.ToUpper().Contains(search.ToUpper()))
                                             .OrderBy(z => z.State)
                                             //.ThenBy(z => z.Name)
                                             .ToListAsync();
