@@ -33,6 +33,7 @@ namespace Capstone.Controllers
             // User should only see thier own trips
             var applicationDbContext = _context.Trips
                                         .Include(t => t.User)
+                                        .Include(t => t.TripItems)
                                         .Where(t => t.UserId == user.Id);
             return View(await applicationDbContext.ToListAsync());
         }

@@ -6,37 +6,19 @@
 
 <h1>@ViewBag.Trip.Name</h1>
 
-@*<p>
-    <a asp-action="Create">Create New</a>
-</p>*@
-<table>
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.Zoo)
-            </th>
-            <th>
-                Location
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody class="table">
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                <a class="btn btn-plain" href="@Html.DisplayFor(modelItem => item.Zoo.WebsiteURL)" target="_blank">@Html.DisplayFor(modelItem => item.Zoo.Name)</a>
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Zoo.City), @Html.DisplayFor(modelItem => item.Zoo.State)
-            </td>
-            <td>
+<div class="card-container">
+
+    @foreach (var item in Model)
+    {
+        <div class="card" style="width: 18rem;">
+            <div class="card-body">
+                <a class="btn btn-plain" href="@Html.DisplayFor(modelItem => item.Zoo.WebsiteURL)" target="_blank"><h5 class="card-title">@Html.DisplayFor(modelItem => item.Zoo.Name)</h5></a>
+                <h6 class="card-subtitle mb-2 text-muted">@Html.DisplayFor(modelItem => item.Zoo.City), @Html.DisplayFor(modelItem => item.Zoo.State)</h6>
                 <div class="icons">
                     <a class="btn btn-plain" asp-action="Delete" asp-route-id="@item.TripItemId"><i class="far fa-trash-alt"></i></a>
                     <a class="btn btn-plain" asp-action="Create" asp-controller="Visits" asp-route-id="@item.ZooId"><i class="fas fa-check"></i> Visited</a>
-                    </div>
-            </td>
-        </tr>
-}
-    </tbody>
-</table>
+                </div>
+            </div>
+        </div>
+    }
+</div>
