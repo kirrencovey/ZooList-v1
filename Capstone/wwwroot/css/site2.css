@@ -66,11 +66,11 @@ body {
     /* Margin bottom by footer height */
     margin-bottom: 60px;
     padding-top: 90px;
-    background-image: url(../images/nico-mksmc-1324405-unsplash.jpg);
+    background-image: url(../images/drops-feather-feathers-66875.jpg);
     background-repeat: no-repeat;
     background-size: 1270px auto;
     background-attachment: fixed;
-    background-position: bottom;
+    /*background-position: bottom;*/
 }
 
 .footer {
@@ -117,7 +117,7 @@ h1 {
 
 .state-letters {
     position: fixed;
-    bottom: 521px;
+    bottom: 583px;
     right: 0;
     font-size: .8em;
     z-index: 1;
@@ -184,7 +184,14 @@ a {
     flex-basis: 31%;
     min-height: 170px;
     margin: 0 10px 20px 11px;
+    transition: all .1s ease-in-out;
 }
+
+    .card:hover {
+
+        transform: scale(1.1);
+    }
+
 
 .by-state-card {
     margin-bottom: -40px;
